@@ -4,7 +4,7 @@ Undefeatable tic tac toe (minimax algorithm) developed with React.js and Redux
 
 ## Try it online
 
-[TBD](http://localhost:3001)
+[Play Tic Tac Toe](https://awkaiser.github.io/react-tictactoe/)
 
 ## Run it yourself
 

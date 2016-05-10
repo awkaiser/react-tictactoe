@@ -36,7 +36,7 @@
   },
   "scripts": {
     "dev": "nodemon -e js,pug --watch server server/index.js",
-    "start": "node service/index.js",
+    "start": "node server/index.js",
     "build": "./node_modules/webpack/bin/webpack.js",
     "test": "node --harmony test.js | faucet"
   },
