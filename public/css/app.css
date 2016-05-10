@@ -1,0 +1,43 @@
+#tictactoe {
+  text-align: center;
+}
+
+.ttt-board {
+  background: black;
+  height: 25em;
+  margin: 2em auto;
+  overflow: hidden;
+  width: 25em;
+}
+
+.ttt-message {
+  margin-bottom: 2em;
+}
+
+.ttt-column {
+  float: left;
+}
+
+.ttt-space {
+  background: white;
+  box-sizing: border-box;
+  height: 8em;
+  margin: 0 0.5em 0.5em 0;
+  width: 8em;
+}
+
+.ttt-space-open:hover {
+  background: lightgray;
+  cursor: pointer;
+}
+
+.ttt-column:last-child .ttt-space {
+  margin-right: 0;
+}
+
+.ttt-symbol {
+  font-size: 5em;
+  font-family: sans-serif;
+  line-height: 0;
+  padding-top: 50%;
+}
