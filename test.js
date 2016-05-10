@@ -157,15 +157,15 @@ test('Tic Tac Toe recognizes state changes', (t) => {
   var game2State = game2.state()
   var game3State = game3.state()
 
-  t.deepEqual(game1State.board[0][0], 0)
+  t.equal(game1State.board[0][0], 0)
 
-  t.deepEqual(game2State.board[0][0], 1)
-  t.deepEqual(game2State.board[1][1], 0)
-  t.deepEqual(game2State.board[2][2], 2)
+  t.equal(game2State.board[0][0], 1)
+  t.equal(game2State.board[1][1], 0)
+  t.equal(game2State.board[2][2], 2)
 
-  t.deepEqual(game3State.board[0][0], 1)
-  t.deepEqual(game3State.board[1][1], 2)
-  t.deepEqual(game3State.board[2][2], 0)
+  t.equal(game3State.board[0][0], 1)
+  t.equal(game3State.board[1][1], 2)
+  t.equal(game3State.board[2][2], 0)
 
   t.end()
 })

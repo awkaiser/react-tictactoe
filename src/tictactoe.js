@@ -13,7 +13,7 @@ import TTTComPlay from './tttcomplay'
 // (Why?) JavaScript classes don't currently support truly private properties
 let _boards = new WeakMap()
 let _openSpaces = new WeakMap()
-let _players = new WeakMap()
+let _nextPlayers = new WeakMap()
 
 // Class for public API of Tic Tac Toe game
 export class TicTacToe {
@@ -33,7 +33,7 @@ export class TicTacToe {
       ? state.openSpaces : 9)
 
     // Default: Player 1 (human) goes first
-    _players.set(this, state.nextPlayer || 1)
+    _nextPlayers.set(this, state.nextPlayer || 1)
 
     return this.state()
   }
@@ -56,7 +56,7 @@ export class TicTacToe {
     _openSpaces.set(this, state.openSpaces - 1)
 
     if (state.nextPlayer === 1) {
-      _players.set(this, 2)
+      _nextPlayers.set(this, 2)
 
       if (_openSpaces.get(this) > 0) {
         // Perform computer's ideal move
@@ -65,7 +65,7 @@ export class TicTacToe {
         this.move.apply(this, idealMove)
       }
     } else {
-      _players.set(this, 1)
+      _nextPlayers.set(this, 1)
     }
 
     return this.state()
@@ -86,7 +86,7 @@ export class TicTacToe {
       }), // Clone board state to preserve data integrity of game
       hasDrawn: !hasWon && openSpaces === 0,
       hasWon: hasWon, // 1 = Player 1 won, 2 = Player 2 won
-      nextPlayer: _players.get(this),
+      nextPlayer: _nextPlayers.get(this),
       openSpaces: openSpaces
     }
   }
@@ -97,13 +97,13 @@ export class TicTacToe {
       return y.slice()
     })
 
-    let player = _players.get(this)
+    let nextPlayer = _nextPlayers.get(this)
 
-    board[x][y] = player
+    board[x][y] = nextPlayer
 
     return new TicTacToe({
       board: board,
-      nextPlayer: player === 1 ? 2 : 1,
+      nextPlayer: nextPlayer === 1 ? 2 : 1,
       openSpaces: _openSpaces.get(this) - 1
     })
   }

@@ -8,15 +8,6 @@ let TicTacToe = React.createClass({
     state: React.PropTypes.object.isRequired,
     onResetClick: React.PropTypes.func.isRequired
   },
-  getDefaultProps: function () {
-    return {
-      board: [
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0]
-      ]
-    }
-  },
   render: function () {
     let state = this.props.state
 

@@ -1,16 +1,10 @@
 'use strict'
 
-// const SRC_DIR = __dirname + '/../src/';
-
 var path = require('path')
 
-var bodyParser = require('body-parser')
 var express = require('express')
 
 var app = express()
-
-// Set up middleware for parsing JSON bodies
-app.use(bodyParser.json())
 
 // Set up Pug (Jade) for use in view templates
 app.set('view engine', 'pug')
