@@ -71,17 +71,20 @@ export class TicTacToe {
     return this.state()
   }
   state () {
-    let board = _boards.get(this)
-
     // Check remaining open spaces
     let openSpaces = _openSpaces.get(this)
+
+    // Don't recompute state if nothing has changed
+    if (this._lastState && this._lastState.openSpaces === openSpaces) {
+      return this._lastState
+    }
 
     // Check if we've reached a winning game state
     let hasWon = this.isOver()
 
-    // Return representation of current game state
-    return {
-      board: board.map(function (y) {
+    // Store and return representation of current game state
+    this._lastState = {
+      board: _boards.get(this).map(function (y) {
         return y.slice()
       }), // Clone board state to preserve data integrity of game
       hasDrawn: !hasWon && openSpaces === 0,
@@ -89,6 +92,8 @@ export class TicTacToe {
       nextPlayer: _nextPlayers.get(this),
       openSpaces: openSpaces
     }
+
+    return this._lastState
   }
   cloneStateWithMove (x, y) {
     // Moves as cloned state is useful for considering future moves + unit tests
@@ -108,6 +113,11 @@ export class TicTacToe {
     })
   }
   isOver () {
+    // Game cannot be won until the 5th move
+    if (_openSpaces.get(this) > 4) {
+      return false
+    }
+
     let board = _boards.get(this)
 
     let winningCombos = [

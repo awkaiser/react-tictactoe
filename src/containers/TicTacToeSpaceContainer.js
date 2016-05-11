@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { makeMove } from '../actions'
+import { startMove, makeMove } from '../actions'
 
 import TicTacToe from '../components/TicTacToeSpace.jsx'
 

@@ -13,9 +13,10 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
   var leftRow = new TicTacToe({
     board: [
       [1, 1, 1],
-      [0, 0, 0],
+      [2, 2, 0],
       [0, 0, 0]
-    ]
+    ],
+    openSpaces: 4
   })
 
   t.equal(leftRow.isOver(), 1)
@@ -23,10 +24,11 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
   // Top row
   var topRow = new TicTacToe({
     board: [
-      [1, 0, 0],
-      [1, 0, 0],
+      [1, 2, 0],
+      [1, 2, 0],
       [1, 0, 0]
-    ]
+    ],
+    openSpaces: 4
   })
 
   t.equal(topRow.isOver(), 1)
@@ -35,9 +37,10 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
   var rightRow = new TicTacToe({
     board: [
       [0, 0, 0],
-      [0, 0, 0],
+      [1, 1, 0],
       [2, 2, 2]
-    ]
+    ],
+    openSpaces: 4
   })
 
   t.equal(rightRow.isOver(), 2)
@@ -45,10 +48,11 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
   // Bottom row
   var bottomRow = new TicTacToe({
     board: [
-      [0, 0, 2],
-      [0, 0, 2],
+      [0, 1, 2],
+      [0, 1, 2],
       [0, 0, 2]
-    ]
+    ],
+    openSpaces: 4
   })
 
   t.equal(bottomRow.isOver(), 2)
@@ -56,20 +60,22 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
   // Diagonals
   var diagonalA = new TicTacToe({
     board: [
-      [0, 0, 1],
+      [2, 0, 1],
       [0, 1, 0],
-      [1, 0, 0]
-    ]
+      [1, 0, 2]
+    ],
+    openSpaces: 4
   })
 
   t.equal(diagonalA.isOver(), 1)
 
   var diagonalB = new TicTacToe({
     board: [
-      [2, 0, 0],
+      [2, 0, 1],
       [0, 2, 0],
-      [0, 0, 2]
-    ]
+      [1, 0, 2]
+    ],
+    openSpaces: 4
   })
 
   t.equal(diagonalB.isOver(), 2)
@@ -80,7 +86,8 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
       [1, 2, 1],
       [1, 2, 0],
       [1, 0, 2]
-    ]
+    ],
+    openSpaces: 2
   })
 
   t.equal(mix1.isOver(), 1)
@@ -90,7 +97,8 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
       [1, 1, 1],
       [1, 2, 2],
       [2, 2, 1]
-    ]
+    ],
+    openSpaces: 0
   })
 
   t.equal(mix2.isOver(), 1)

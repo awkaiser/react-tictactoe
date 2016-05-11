@@ -8,15 +8,13 @@
  */
 
 export default class TTTComPlay {
-  static possibleMoves (game) {
-    let state = game.state()
-
+  static possibleMoves (board) {
     let moves = []
 
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
         // Empty spaces will be `0` (falsey)
-        if (!state.board[x][y]) {
+        if (!board[x][y]) {
           moves.push([x, y])
         }
       }
@@ -24,8 +22,8 @@ export default class TTTComPlay {
 
     return moves
   }
-  static score (game, depth = 0) {
-    let winner = game.isOver()
+  static score (state, depth = 0) {
+    let winner = state.hasWon
 
     if (!winner) {
       return 0
@@ -44,11 +42,11 @@ export default class TTTComPlay {
 
     if (state.hasWon || state.hasDrawn) {
       return {
-        score: TTTComPlay.score(game, depth)
+        score: TTTComPlay.score(state, depth)
       }
     }
 
-    let possibleMoves = TTTComPlay.possibleMoves(game)
+    let possibleMoves = TTTComPlay.possibleMoves(state.board)
 
     let moves = []
     let scores = []
