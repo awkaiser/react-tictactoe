@@ -35,6 +35,9 @@ export class TicTacToe {
     // Default: Player 1 (human) goes first
     _nextPlayers.set(this, state.nextPlayer || 1)
 
+    // Clear last state
+    this._lastState = null
+
     return this.state()
   }
   move (x, y) {
@@ -46,7 +49,7 @@ export class TicTacToe {
 
     // Return early on invalid move
     if (typeof x === 'undefined' || typeof y === 'undefined' ||
-        board[x][y] || state.openSpaces === 0 || state.hasWon) {
+        state.hasWon || state.hasDrawn || board[x][y]) {
       return state
     }
 
@@ -56,9 +59,10 @@ export class TicTacToe {
     // Decrement counter of available open spaces
     openSpaces -= 1
 
-    // Store updated open spaces value
+    // Store updated open spaces value prior to performing computer move
     _openSpaces.set(this, openSpaces)
 
+    // Next turn!
     if (state.nextPlayer === 1) {
       _nextPlayers.set(this, 2)
 
@@ -89,12 +93,12 @@ export class TicTacToe {
     }
 
     // Check if we've reached a winning game state
-    let hasWon = this.isOver()
+    let hasWon = this.hasWon()
 
     // Store and return representation of current game state
     this._lastState = {
-      board: _boards.get(this).map(function (y) {
-        return y.slice()
+      board: _boards.get(this).map(function (column) {
+        return column.slice()
       }), // Clone board state to preserve data integrity of game
       hasDrawn: !hasWon && openSpaces === 0,
       hasWon: hasWon, // 1 = Player 1 won, 2 = Player 2 won
@@ -106,9 +110,8 @@ export class TicTacToe {
   }
   cloneStateWithMove (x, y) {
     // Moves as cloned state is useful for considering future moves + unit tests
-
-    let board = _boards.get(this).map(function (y) {
-      return y.slice()
+    let board = _boards.get(this).map(function (column) {
+      return column.slice()
     })
 
     let nextPlayer = _nextPlayers.get(this)
@@ -127,7 +130,7 @@ export class TicTacToe {
       openSpaces
     })
   }
-  isOver () {
+  hasWon () {
     // Game cannot be won until the 5th move
     if (_openSpaces.get(this) > 4) {
       return false

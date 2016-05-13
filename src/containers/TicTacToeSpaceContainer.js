@@ -1,14 +1,14 @@
 import { connect } from 'react-redux'
 
-import { startMove, makeMove } from '../actions'
+import { makeMove } from '../actions'
 
 import TicTacToe from '../components/TicTacToeSpace.jsx'
 
 const mapStateToProps = (state, ownProps) => {
-  let value = state.board[ownProps.x][ownProps.y]
+  let played = state.board[ownProps.x][ownProps.y]
 
   return {
-    state: value || 0
+    played: played || 0
   }
 }
 

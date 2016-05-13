@@ -3,20 +3,20 @@ import ReactDOM from 'react-dom'
 
 const TicTacToeSpace = React.createClass({
   propTypes: {
-    state: React.PropTypes.number.isRequired,
+    played: React.PropTypes.number.isRequired,
     onClick: React.PropTypes.func.isRequired
   },
   render: function () {
     let classNames = ['ttt-space']
     let display = String.fromCharCode(160) // &nbsp;
 
-    if (this.props.state === 1) {
+    if (this.props.played === 1) {
       display = 'X'
-    } else if (this.props.state === 2) {
+    } else if (this.props.played === 2) {
       display = 'O'
     }
 
-    if (!this.props.state) {
+    if (!this.props.played) {
       classNames.push('ttt-space-open')
     }
 

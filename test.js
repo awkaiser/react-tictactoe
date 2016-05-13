@@ -9,8 +9,8 @@ var TicTacToe = require('./src/tictactoe').TicTacToe
 test('Tic Tac Toe recognizes winning conditions', (t) => {
   t.plan(8)
 
-  // Left row
-  var leftRow = new TicTacToe({
+  // Left side
+  var leftSide = new TicTacToe({
     board: [
       [1, 1, 1],
       [2, 2, 0],
@@ -19,10 +19,10 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
     openSpaces: 4
   })
 
-  t.equal(leftRow.isOver(), 1)
+  t.equal(leftSide.hasWon(), 1)
 
-  // Top row
-  var topRow = new TicTacToe({
+  // Top side
+  var topSide = new TicTacToe({
     board: [
       [1, 2, 0],
       [1, 2, 0],
@@ -31,10 +31,10 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
     openSpaces: 4
   })
 
-  t.equal(topRow.isOver(), 1)
+  t.equal(topSide.hasWon(), 1)
 
-  // Right row
-  var rightRow = new TicTacToe({
+  // Right side
+  var rightSide = new TicTacToe({
     board: [
       [0, 0, 0],
       [1, 1, 0],
@@ -43,10 +43,10 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
     openSpaces: 4
   })
 
-  t.equal(rightRow.isOver(), 2)
+  t.equal(rightSide.hasWon(), 2)
 
-  // Bottom row
-  var bottomRow = new TicTacToe({
+  // Bottom side
+  var bottomSide = new TicTacToe({
     board: [
       [0, 1, 2],
       [0, 1, 2],
@@ -55,7 +55,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
     openSpaces: 4
   })
 
-  t.equal(bottomRow.isOver(), 2)
+  t.equal(bottomSide.hasWon(), 2)
 
   // Diagonals
   var diagonalA = new TicTacToe({
@@ -67,7 +67,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
     openSpaces: 4
   })
 
-  t.equal(diagonalA.isOver(), 1)
+  t.equal(diagonalA.hasWon(), 1)
 
   var diagonalB = new TicTacToe({
     board: [
@@ -78,7 +78,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
     openSpaces: 4
   })
 
-  t.equal(diagonalB.isOver(), 2)
+  t.equal(diagonalB.hasWon(), 2)
 
   // Mixed conditions
   var mix1 = new TicTacToe({
@@ -90,7 +90,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
     openSpaces: 2
   })
 
-  t.equal(mix1.isOver(), 1)
+  t.equal(mix1.hasWon(), 1)
 
   var mix2 = new TicTacToe({
     board: [
@@ -101,7 +101,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
     openSpaces: 0
   })
 
-  t.equal(mix2.isOver(), 1)
+  t.equal(mix2.hasWon(), 1)
 
   t.end()
 })
@@ -117,7 +117,7 @@ test('Tic Tac Toe recognizes non-winning conditions', (t) => {
     ]
   })
 
-  t.equal(noWin1.isOver(), false)
+  t.equal(noWin1.hasWon(), false)
 
   var noWin2 = new TicTacToe({
     board: [
@@ -127,7 +127,7 @@ test('Tic Tac Toe recognizes non-winning conditions', (t) => {
     ]
   })
 
-  t.equal(noWin2.isOver(), false)
+  t.equal(noWin2.hasWon(), false)
 
   var noWin3 = new TicTacToe({
     board: [
@@ -137,7 +137,7 @@ test('Tic Tac Toe recognizes non-winning conditions', (t) => {
     ]
   })
 
-  t.equal(noWin3.isOver(), false)
+  t.equal(noWin3.hasWon(), false)
 
   var noWin4 = new TicTacToe({
     board: [
@@ -147,7 +147,7 @@ test('Tic Tac Toe recognizes non-winning conditions', (t) => {
     ]
   })
 
-  t.equal(noWin4.isOver(), false)
+  t.equal(noWin4.hasWon(), false)
 
   t.end()
 })
@@ -211,7 +211,7 @@ test('Tic Tac Toe players can draw game', (t) => {
 })
 
 test('Tic Tac Toe recognizes a player 1 win', (t) => {
-  t.plan(4)
+  t.plan(3)
 
   var game = new TicTacToe()
 
@@ -236,13 +236,12 @@ test('Tic Tac Toe recognizes a player 1 win', (t) => {
   t.equal(state.openSpaces, 2)
   t.equal(state.hasDrawn, false)
   t.equal(state.hasWon, 1)
-  t.equal(game.isOver(), 1)
 
   t.end()
 })
 
 test('Tic Tac Toe recognizes a player 2 win', (t) => {
-  t.plan(4)
+  t.plan(3)
 
   var game = new TicTacToe()
 
@@ -266,7 +265,6 @@ test('Tic Tac Toe recognizes a player 2 win', (t) => {
   t.equal(state.openSpaces, 3)
   t.equal(state.hasDrawn, false)
   t.equal(state.hasWon, 2)
-  t.equal(game.isOver(), 2)
 
   t.end()
 })
