@@ -57,7 +57,7 @@ export default class TTTComPlay {
     depth += 1
 
     possibleMoves.forEach(function checkPossibleMove (move) {
-      let futureGame = game.cloneStateWithMove.apply(game, move)
+      let futureGame = game.cloneWithMove.apply(game, move)
       let possible = TTTComPlay.minimax(futureGame, depth)
 
       moves.push(move)

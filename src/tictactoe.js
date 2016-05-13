@@ -108,7 +108,7 @@ export class TicTacToe {
 
     return this._lastState
   }
-  cloneStateWithMove (x, y) {
+  cloneWithMove (x, y) {
     // Moves as cloned state is useful for considering future moves + unit tests
     let board = _boards.get(this).map(function (column) {
       return column.slice()

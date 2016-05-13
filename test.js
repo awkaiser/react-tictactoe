@@ -156,8 +156,8 @@ test('Tic Tac Toe recognizes state changes', (t) => {
   t.plan(7)
 
   var game1 = new TicTacToe()
-  var game2 = game1.cloneStateWithMove(0, 0)
-  var game3 = game2.cloneStateWithMove(1, 1)
+  var game2 = game1.cloneWithMove(0, 0)
+  var game3 = game2.cloneWithMove(1, 1)
 
   game2.move(2, 2)
 
@@ -191,15 +191,15 @@ test('Tic Tac Toe players can draw game', (t) => {
    * O X O
    */
 
-  game = game.cloneStateWithMove(1, 1) // X
-  game = game.cloneStateWithMove(2, 2) // O
-  game = game.cloneStateWithMove(0, 0) // X
-  game = game.cloneStateWithMove(0, 2) // O
-  game = game.cloneStateWithMove(2, 1) // X
-  game = game.cloneStateWithMove(0, 1) // O
-  game = game.cloneStateWithMove(1, 2) // X
-  game = game.cloneStateWithMove(1, 0) // O
-  game = game.cloneStateWithMove(2, 0) // X (draw)
+  game = game.cloneWithMove(1, 1) // X
+  game = game.cloneWithMove(2, 2) // O
+  game = game.cloneWithMove(0, 0) // X
+  game = game.cloneWithMove(0, 2) // O
+  game = game.cloneWithMove(2, 1) // X
+  game = game.cloneWithMove(0, 1) // O
+  game = game.cloneWithMove(1, 2) // X
+  game = game.cloneWithMove(1, 0) // O
+  game = game.cloneWithMove(2, 0) // X (draw)
 
   state = game.state()
 
@@ -223,13 +223,13 @@ test('Tic Tac Toe recognizes a player 1 win', (t) => {
    * x x -
    */
 
-  game = game.cloneStateWithMove(1, 1) // x
-  game = game.cloneStateWithMove(0, 0) // o
-  game = game.cloneStateWithMove(0, 2) // x
-  game = game.cloneStateWithMove(2, 0) // o
-  game = game.cloneStateWithMove(1, 0) // x
-  game = game.cloneStateWithMove(0, 1) // o
-  game = game.cloneStateWithMove(1, 2) // x (winner)
+  game = game.cloneWithMove(1, 1) // x
+  game = game.cloneWithMove(0, 0) // o
+  game = game.cloneWithMove(0, 2) // x
+  game = game.cloneWithMove(2, 0) // o
+  game = game.cloneWithMove(1, 0) // x
+  game = game.cloneWithMove(0, 1) // o
+  game = game.cloneWithMove(1, 2) // x (winner)
 
   state = game.state()
 
@@ -253,12 +253,12 @@ test('Tic Tac Toe recognizes a player 2 win', (t) => {
    * o - x
    */
 
-  game = game.cloneStateWithMove(2, 0) // x
-  game = game.cloneStateWithMove(0, 0) // o
-  game = game.cloneStateWithMove(1, 1) // x
-  game = game.cloneStateWithMove(0, 2) // o
-  game = game.cloneStateWithMove(2, 2) // x
-  game = game.cloneStateWithMove(0, 1) // o (winner)
+  game = game.cloneWithMove(2, 0) // x
+  game = game.cloneWithMove(0, 0) // o
+  game = game.cloneWithMove(1, 1) // x
+  game = game.cloneWithMove(0, 2) // o
+  game = game.cloneWithMove(2, 2) // x
+  game = game.cloneWithMove(0, 1) // o (winner)
 
   state = game.state()
 

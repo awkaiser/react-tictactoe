@@ -15,7 +15,7 @@ export function ticTacToeApp (state = initialState, action) {
         return state
       }
 
-      newGame = game.cloneStateWithMove(action.x, action.y)
+      newGame = game.cloneWithMove(action.x, action.y)
 
       return newGame.state()
     case actions.FINISH_MOVE:
