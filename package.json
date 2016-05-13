@@ -38,7 +38,7 @@
     "dev": "nodemon -e js,pug --watch server server/index.js",
     "faucet": "./node_modules/.bin/faucet",
     "start": "node server/index.js",
-    "test": "node --harmony test.js | faucet",
+    "test": "node --harmony test.js | npm run faucet",
     "watch": "npm run build -- -w"
   },
   "author": "August “Kai” Kaiser <augustkaiser@gmail.com>",
