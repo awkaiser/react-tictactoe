@@ -37,7 +37,7 @@
     "start": "node server/index.js",
     "build": "./node_modules/webpack/bin/webpack.js",
     "test": "node --harmony test.js | faucet",
-    "watch": "./node_modules/webpack/bin/webpack.js -w"
+    "watch": "npm run build -- -w"
   },
   "author": "August “Kai” Kaiser <augustkaiser@gmail.com>",
   "license": "MIT"
