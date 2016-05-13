@@ -185,15 +185,21 @@ test('Tic Tac Toe players can draw game', (t) => {
 
   var state
 
-  game = game.cloneStateWithMove(1, 1)
-  game = game.cloneStateWithMove(2, 2)
-  game = game.cloneStateWithMove(0, 0)
-  game = game.cloneStateWithMove(0, 2)
-  game = game.cloneStateWithMove(2, 1)
-  game = game.cloneStateWithMove(0, 1)
-  game = game.cloneStateWithMove(1, 2)
-  game = game.cloneStateWithMove(1, 0)
-  game = game.cloneStateWithMove(0, 2)
+  /**
+   * X O X
+   * O X X
+   * O X O
+   */
+
+  game = game.cloneStateWithMove(1, 1) // X
+  game = game.cloneStateWithMove(2, 2) // O
+  game = game.cloneStateWithMove(0, 0) // X
+  game = game.cloneStateWithMove(0, 2) // O
+  game = game.cloneStateWithMove(2, 1) // X
+  game = game.cloneStateWithMove(0, 1) // O
+  game = game.cloneStateWithMove(1, 2) // X
+  game = game.cloneStateWithMove(1, 0) // O
+  game = game.cloneStateWithMove(2, 0) // X (draw)
 
   state = game.state()
 

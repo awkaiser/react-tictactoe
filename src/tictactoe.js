@@ -113,12 +113,18 @@ export class TicTacToe {
 
     let nextPlayer = _nextPlayers.get(this)
 
-    board[x][y] = nextPlayer
+    let openSpaces = _openSpaces.get(this)
+
+    if (!board[x][y]) {
+      board[x][y] = nextPlayer
+      nextPlayer = nextPlayer === 1 ? 2 : 1
+      openSpaces -= 1
+    }
 
     return new TicTacToe({
-      board: board,
-      nextPlayer: nextPlayer === 1 ? 2 : 1,
-      openSpaces: _openSpaces.get(this) - 1
+      board,
+      nextPlayer,
+      openSpaces
     })
   }
   isOver () {
