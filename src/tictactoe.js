@@ -40,6 +40,7 @@ export class TicTacToe {
   move (x, y) {
     let board = _boards.get(this)
     let state = this.state()
+    let openSpaces = state.openSpaces
 
     let idealMove
 
@@ -53,14 +54,22 @@ export class TicTacToe {
     board[x][y] = state.nextPlayer
 
     // Decrement counter of available open spaces
-    _openSpaces.set(this, state.openSpaces - 1)
+    openSpaces -= 1
+
+    // Store updated open spaces value
+    _openSpaces.set(this, openSpaces)
 
     if (state.nextPlayer === 1) {
       _nextPlayers.set(this, 2)
 
-      if (_openSpaces.get(this) > 0) {
+      if (openSpaces) {
         // Perform computer's ideal move
-        idealMove = TTTComPlay.idealMove(this)
+        if (openSpaces === 8) {
+          // Reduce minimax search space by playing center or corner first
+          idealMove = TTTComPlay.openingMove(this)
+        } else {
+          idealMove = TTTComPlay.idealMove(this)
+        }
 
         this.move.apply(this, idealMove)
       }

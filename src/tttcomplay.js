@@ -75,6 +75,24 @@ export default class TTTComPlay {
       score: scores[typeof maxIndex !== 'undefined' ? maxIndex : minIndex]
     }
   }
+  static openingMove (game) {
+    let state = game.state()
+
+    let corners = [
+      [0, 0],
+      [2, 0],
+      [0, 2],
+      [2, 2]
+    ]
+
+    if (state.board[1][1] === 0) {
+      // Play center
+      return [1, 1]
+    } else {
+      // Play a random corner
+      return corners[Math.floor(Math.random() * 4)]
+    }
+  }
   static idealMove (game) {
     return TTTComPlay.minimax(game).move
   }
