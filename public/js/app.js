@@ -23447,6 +23447,7 @@
 	    value: function move(x, y) {
 	      var board = _boards.get(this);
 	      var state = this.state();
+	      var openSpaces = state.openSpaces;
 
 	      var idealMove = void 0;
 
@@ -23459,14 +23460,22 @@
 	      board[x][y] = state.nextPlayer;
 
 	      // Decrement counter of available open spaces
-	      _openSpaces.set(this, state.openSpaces - 1);
+	      openSpaces -= 1;
+
+	      // Store updated open spaces value
+	      _openSpaces.set(this, openSpaces);
 
 	      if (state.nextPlayer === 1) {
 	        _nextPlayers.set(this, 2);
 
-	        if (_openSpaces.get(this) > 0) {
+	        if (openSpaces) {
 	          // Perform computer's ideal move
-	          idealMove = _tttcomplay2.default.idealMove(this);
+	          if (openSpaces === 8) {
+	            // Reduce minimax search space by playing center or corner first
+	            idealMove = _tttcomplay2.default.openingMove(this);
+	          } else {
+	            idealMove = _tttcomplay2.default.idealMove(this);
+	          }
 
 	          this.move.apply(this, idealMove);
 	        }
@@ -24168,6 +24177,21 @@
 	        move: moves[typeof maxIndex !== 'undefined' ? maxIndex : minIndex],
 	        score: scores[typeof maxIndex !== 'undefined' ? maxIndex : minIndex]
 	      };
+	    }
+	  }, {
+	    key: 'openingMove',
+	    value: function openingMove(game) {
+	      var state = game.state();
+
+	      var corners = [[0, 0], [2, 0], [0, 2], [2, 2]];
+
+	      if (state.board[1][1] === 0) {
+	        // Play center
+	        return [1, 1];
+	      } else {
+	        // Play a random corner
+	        return corners[Math.floor(Math.random() * 4)];
+	      }
 	    }
 	  }, {
 	    key: 'idealMove',
