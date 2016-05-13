@@ -11,8 +11,9 @@ Undefeatable tic tac toe (minimax algorithm) developed with ES6, React.js and Re
 1. Clone repository to local disk
 1. In repository root directory, run:
 
-   a. `npm install`
-   a. `npm start`
+  `npm install`
+
+  `npm start`
 
 1. Navigate to [http://localhost:3001](http://localhost:3001)
 
@@ -20,8 +21,8 @@ Undefeatable tic tac toe (minimax algorithm) developed with ES6, React.js and Re
 
 1. Install [Faucet](https://github.com/substack/faucet) (human-readable TAP summarizer):
 
-   `npm install -g faucet`
+  `npm install -g faucet`
 
 1. In repository root directory, run:
 
-   `npm test | faucet`
+  `npm test | faucet`
