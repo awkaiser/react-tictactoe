@@ -23440,6 +23440,9 @@
 	      // Default: Player 1 (human) goes first
 	      _nextPlayers.set(this, state.nextPlayer || 1);
 
+	      // Clear last state
+	      this._lastState = null;
+
 	      return this.state();
 	    }
 	  }, {
@@ -23452,7 +23455,7 @@
 	      var idealMove = void 0;
 
 	      // Return early on invalid move
-	      if (typeof x === 'undefined' || typeof y === 'undefined' || board[x][y] || state.openSpaces === 0 || state.hasWon) {
+	      if (typeof x === 'undefined' || typeof y === 'undefined' || state.hasWon || state.hasDrawn || board[x][y]) {
 	        return state;
 	      }
 
@@ -23462,9 +23465,10 @@
 	      // Decrement counter of available open spaces
 	      openSpaces -= 1;
 
-	      // Store updated open spaces value
+	      // Store updated open spaces value prior to performing computer move
 	      _openSpaces.set(this, openSpaces);
 
+	      // Next turn!
 	      if (state.nextPlayer === 1) {
 	        _nextPlayers.set(this, 2);
 
@@ -23497,12 +23501,12 @@
 	      }
 
 	      // Check if we've reached a winning game state
-	      var hasWon = this.isOver();
+	      var hasWon = this.hasWon();
 
 	      // Store and return representation of current game state
 	      this._lastState = {
-	        board: _boards.get(this).map(function (y) {
-	          return y.slice();
+	        board: _boards.get(this).map(function (column) {
+	          return column.slice();
 	        }), // Clone board state to preserve data integrity of game
 	        hasDrawn: !hasWon && openSpaces === 0,
 	        hasWon: hasWon, // 1 = Player 1 won, 2 = Player 2 won
@@ -23516,24 +23520,29 @@
 	    key: 'cloneStateWithMove',
 	    value: function cloneStateWithMove(x, y) {
 	      // Moves as cloned state is useful for considering future moves + unit tests
-
-	      var board = _boards.get(this).map(function (y) {
-	        return y.slice();
+	      var board = _boards.get(this).map(function (column) {
+	        return column.slice();
 	      });
 
 	      var nextPlayer = _nextPlayers.get(this);
 
-	      board[x][y] = nextPlayer;
+	      var openSpaces = _openSpaces.get(this);
+
+	      if (!board[x][y]) {
+	        board[x][y] = nextPlayer;
+	        nextPlayer = nextPlayer === 1 ? 2 : 1;
+	        openSpaces -= 1;
+	      }
 
 	      return new TicTacToe({
 	        board: board,
-	        nextPlayer: nextPlayer === 1 ? 2 : 1,
-	        openSpaces: _openSpaces.get(this) - 1
+	        nextPlayer: nextPlayer,
+	        openSpaces: openSpaces
 	      });
 	    }
 	  }, {
-	    key: 'isOver',
-	    value: function isOver() {
+	    key: 'hasWon',
+	    value: function hasWon() {
 	      // Game cannot be won until the 5th move
 	      if (_openSpaces.get(this) > 4) {
 	        return false;
@@ -24381,10 +24390,10 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
-	  var value = state.board[ownProps.x][ownProps.y];
+	  var played = state.board[ownProps.x][ownProps.y];
 
 	  return {
-	    state: value || 0
+	    played: played || 0
 	  };
 	};
 
@@ -24424,20 +24433,20 @@
 	  displayName: 'TicTacToeSpace',
 
 	  propTypes: {
-	    state: _react2.default.PropTypes.number.isRequired,
+	    played: _react2.default.PropTypes.number.isRequired,
 	    onClick: _react2.default.PropTypes.func.isRequired
 	  },
 	  render: function render() {
 	    var classNames = ['ttt-space'];
 	    var display = String.fromCharCode(160); // &nbsp;
 
-	    if (this.props.state === 1) {
+	    if (this.props.played === 1) {
 	      display = 'X';
-	    } else if (this.props.state === 2) {
+	    } else if (this.props.played === 2) {
 	      display = 'O';
 	    }
 
-	    if (!this.props.state) {
+	    if (!this.props.played) {
 	      classNames.push('ttt-space-open');
 	    }
 
