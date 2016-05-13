@@ -36,7 +36,8 @@
     "build": "./node_modules/webpack/bin/webpack.js",
     "dev": "nodemon -e js,pug --watch server server/index.js",
     "start": "node server/index.js",
-    "test": "node --harmony test.js | faucet"
+    "test": "node --harmony test.js | faucet",
+    "watch": "npm run build -- -w"
   },
   "author": "August “Kai” Kaiser <augustkaiser@gmail.com>",
   "license": "MIT"
