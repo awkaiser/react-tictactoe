@@ -30,7 +30,11 @@ let TicTacToe = React.createClass({
         </div>
         <div className='ttt-message'>{message}</div>
         <div className='ttt-controls'>
-          <button className='btn btn-default' onClick={this.props.onResetClick}>Reset</button>
+          <button className='btn btn-primary' onClick={this.props.onResetClick}>Reset Game</button>
+        </div>
+        <div className='ttt-github'>
+          <iframe src='https://ghbtns.com/github-btn.html?user=awkaiser&repo=react-tictactoe&type=star' frameborder='0' scrolling='0' width='51px' height='20px'></iframe>
+          <iframe src='https://ghbtns.com/github-btn.html?user=awkaiser&type=follow' frameborder='0' scrolling='0' width='123px' height='20px'></iframe>
         </div>
       </div>
     )
