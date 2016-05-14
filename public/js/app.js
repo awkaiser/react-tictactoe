@@ -21777,7 +21777,7 @@
 	        return state;
 	      }
 
-	      newGame = game.cloneStateWithMove(action.x, action.y);
+	      newGame = game.cloneWithMove(action.x, action.y);
 
 	      return newGame.state();
 	    case actions.FINISH_MOVE:
@@ -23517,8 +23517,8 @@
 	      return this._lastState;
 	    }
 	  }, {
-	    key: 'cloneStateWithMove',
-	    value: function cloneStateWithMove(x, y) {
+	    key: 'cloneWithMove',
+	    value: function cloneWithMove(x, y) {
 	      // Moves as cloned state is useful for considering future moves + unit tests
 	      var board = _boards.get(this).map(function (column) {
 	        return column.slice();
@@ -24169,7 +24169,7 @@
 	      depth += 1;
 
 	      possibleMoves.forEach(function checkPossibleMove(move) {
-	        var futureGame = game.cloneStateWithMove.apply(game, move);
+	        var futureGame = game.cloneWithMove.apply(game, move);
 	        var possible = TTTComPlay.minimax(futureGame, depth);
 
 	        moves.push(move);
@@ -24313,9 +24313,15 @@
 	        { className: 'ttt-controls' },
 	        _react2.default.createElement(
 	          'button',
-	          { className: 'btn btn-default', onClick: this.props.onResetClick },
-	          'Reset'
+	          { className: 'btn btn-primary', onClick: this.props.onResetClick },
+	          'Reset Game'
 	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'ttt-github' },
+	        _react2.default.createElement('iframe', { src: 'https://ghbtns.com/github-btn.html?user=awkaiser&repo=react-tictactoe&type=star', frameborder: '0', scrolling: '0', width: '51px', height: '20px' }),
+	        _react2.default.createElement('iframe', { src: 'https://ghbtns.com/github-btn.html?user=awkaiser&type=follow', frameborder: '0', scrolling: '0', width: '123px', height: '20px' })
 	      )
 	    );
 	  }

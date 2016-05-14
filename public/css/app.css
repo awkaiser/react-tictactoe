@@ -1,17 +1,39 @@
+body {
+  background: url('images/ttt-background.png') top left repeat;
+}
+
 #tictactoe {
   text-align: center;
 }
 
 .ttt-board {
-  background: black;
   height: 25em;
   margin: 2em auto;
-  overflow: hidden;
   width: 25em;
 }
 
 .ttt-message {
-  margin-bottom: 2em;
+  background: white;
+  border: 0.25em solid #DDE;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  color: #99C;
+  margin: 0 auto 2em auto;
+  padding: 1em 0;
+  width: 25em;
+}
+
+.ttt-github {
+  margin-top: 2em;
+}
+
+.ttt-github iframe {
+  border: 0;
+}
+
+.ttt-github iframe:first-child {
+  margin-right: 1em;
 }
 
 .ttt-column {
@@ -20,14 +42,16 @@
 
 .ttt-space {
   background: white;
-  box-sizing: border-box;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(200, 200, 215, 0.55);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(200, 200, 215, 0.55);
+  box-shadow: 10px 10px 5px 0px rgba(200, 200, 215, 0.55);
   height: 8em;
   margin: 0 0.5em 0.5em 0;
   width: 8em;
 }
 
 .ttt-space-open:hover {
-  background: lightgray;
+  background: #EEFCFC;
   cursor: pointer;
 }
 
