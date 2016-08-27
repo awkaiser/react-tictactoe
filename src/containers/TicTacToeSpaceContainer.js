@@ -5,7 +5,7 @@ import { makeMove } from '../actions'
 import TicTacToe from '../components/TicTacToeSpace.jsx'
 
 const mapStateToProps = (state, ownProps) => {
-  let played = state.board[ownProps.x][ownProps.y]
+  const played = state.board[ownProps.x][ownProps.y]
 
   return {
     played: played || 0

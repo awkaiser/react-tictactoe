@@ -1,16 +1,16 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line
 import ReactDOM from 'react-dom'
 
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux' // eslint-disable-line
 
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
 import { ticTacToeApp } from './reducers'
 
-import TicTacToeContainer from './containers/TicTacToeContainer'
+import TicTacToeContainer from './containers/TicTacToeContainer' // eslint-disable-line
 
-let store = createStore(
+const store = createStore(
   ticTacToeApp,
   applyMiddleware(thunk)
 )

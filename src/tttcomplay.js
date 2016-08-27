@@ -9,7 +9,7 @@
 
 export default class TTTComPlay {
   static possibleMoves (board) {
-    let moves = []
+    const moves = []
 
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
@@ -23,7 +23,7 @@ export default class TTTComPlay {
     return moves
   }
   static score (state, depth = 0) {
-    let winner = state.hasWon
+    const winner = state.hasWon
 
     if (!winner) {
       return 0
@@ -38,7 +38,7 @@ export default class TTTComPlay {
       )
     }
 
-    let state = game.state()
+    const state = game.state()
 
     if (state.hasWon || state.hasDrawn) {
       return {
@@ -46,10 +46,10 @@ export default class TTTComPlay {
       }
     }
 
-    let possibleMoves = TTTComPlay.possibleMoves(state.board)
+    const possibleMoves = TTTComPlay.possibleMoves(state.board)
 
-    let moves = []
-    let scores = []
+    const moves = []
+    const scores = []
 
     let maxIndex
     let minIndex
@@ -57,8 +57,8 @@ export default class TTTComPlay {
     depth += 1
 
     possibleMoves.forEach(function checkPossibleMove (move) {
-      let futureGame = game.cloneWithMove.apply(game, move)
-      let possible = TTTComPlay.minimax(futureGame, depth)
+      const futureGame = game.cloneWithMove.apply(game, move)
+      const possible = TTTComPlay.minimax(futureGame, depth)
 
       moves.push(move)
       scores.push(possible.score)
@@ -76,9 +76,9 @@ export default class TTTComPlay {
     }
   }
   static openingMove (game) {
-    let state = game.state()
+    const state = game.state()
 
-    let corners = [
+    const corners = [
       [0, 0],
       [2, 0],
       [0, 2],

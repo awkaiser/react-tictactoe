@@ -1,31 +1,31 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom' // eslint-disable-line
 
-const TicTacToeSpace = React.createClass({
-  propTypes: {
-    played: React.PropTypes.number.isRequired,
-    onClick: React.PropTypes.func.isRequired
-  },
-  render: function () {
-    let classNames = ['ttt-space']
-    let display = String.fromCharCode(160) // &nbsp;
+const TicTacToeSpace = (props) => {
+  const classNames = ['ttt-space']
 
-    if (this.props.played === 1) {
-      display = 'X'
-    } else if (this.props.played === 2) {
-      display = 'O'
-    }
+  let display = String.fromCharCode(160) // &nbsp;
 
-    if (!this.props.played) {
-      classNames.push('ttt-space-open')
-    }
-
-    return (
-      <div className={classNames.join(' ')} onClick={this.props.onClick}>
-        <div className='ttt-symbol'>{display}</div>
-      </div>
-    )
+  if (props.played === 1) {
+    display = 'X'
+  } else if (props.played === 2) {
+    display = 'O'
   }
-})
+
+  if (!props.played) {
+    classNames.push('ttt-space-open')
+  }
+
+  return (
+    <div className={classNames.join(' ')} onClick={props.onClick}>
+      <div className='ttt-symbol'>{display}</div>
+    </div>
+  )
+}
+
+TicTacToeSpace.propTypes = {
+  played: React.PropTypes.number.isRequired,
+  onClick: React.PropTypes.func.isRequired
+}
 
 export default TicTacToeSpace

@@ -23,7 +23,7 @@ export function makeMove (x, y) {
 
     return (new Promise(function (resolve, reject) {
       setTimeout(function () {
-        let state = game.move(x, y)
+        const state = game.move(x, y)
 
         resolve(state)
       }, 10)

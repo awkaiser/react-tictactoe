@@ -11,9 +11,9 @@ import TTTComPlay from './tttcomplay'
 
 // Define some WeakMaps to hold private data for class instances
 // (Why?) JavaScript classes don't currently support truly private properties
-let _boards = new WeakMap()
-let _openSpaces = new WeakMap()
-let _nextPlayers = new WeakMap()
+const _boards = new WeakMap()
+const _openSpaces = new WeakMap()
+const _nextPlayers = new WeakMap()
 
 // Class for public API of Tic Tac Toe game
 export class TicTacToe {
@@ -41,8 +41,9 @@ export class TicTacToe {
     return this.state()
   }
   move (x, y) {
-    let board = _boards.get(this)
-    let state = this.state()
+    const board = _boards.get(this)
+    const state = this.state()
+
     let openSpaces = state.openSpaces
 
     let idealMove
@@ -85,7 +86,7 @@ export class TicTacToe {
   }
   state () {
     // Check remaining open spaces
-    let openSpaces = _openSpaces.get(this)
+    const openSpaces = _openSpaces.get(this)
 
     // Don't recompute state if nothing has changed
     if (this._lastState && this._lastState.openSpaces === openSpaces) {
@@ -93,7 +94,7 @@ export class TicTacToe {
     }
 
     // Check if we've reached a winning game state
-    let hasWon = this.hasWon()
+    const hasWon = this.hasWon()
 
     // Store and return representation of current game state
     this._lastState = {
@@ -110,7 +111,7 @@ export class TicTacToe {
   }
   cloneWithMove (x, y) {
     // Moves as cloned state is useful for considering future moves + unit tests
-    let board = _boards.get(this).map(function (column) {
+    const board = _boards.get(this).map(function (column) {
       return column.slice()
     })
 
@@ -136,9 +137,9 @@ export class TicTacToe {
       return false
     }
 
-    let board = _boards.get(this)
+    const board = _boards.get(this)
 
-    let winningCombos = [
+    const winningCombos = [
       [[0, 0], [0, 1], [0, 2]], // Left side
       [[0, 0], [1, 0], [2, 0]], // Top side
       [[2, 0], [2, 1], [2, 2]], // Right side
