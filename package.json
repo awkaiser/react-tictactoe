@@ -1,6 +1,6 @@
 {
   "name": "react-tictactoe",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React + Redux: Tic Tac Toe",
   "author": "August “Kai” Kaiser <augustkaiser@gmail.com>",
   "repository": "awkaiser/react-tictactoe",

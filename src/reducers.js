@@ -7,17 +7,13 @@ const initialState = game.state()
 import { TicTacToe } from './tictactoe'
 
 export function ticTacToeApp (state = initialState, action) {
-  let newGame
-
   switch (action.type) {
     case actions.START_MOVE:
       if (state.hasWon || state.board[action.x][action.y] !== 0) {
         return state
       }
 
-      newGame = game.cloneWithMove(action.x, action.y)
-
-      return newGame.state()
+      return game.cloneWithMove(action.x, action.y).state()
     case actions.FINISH_MOVE:
       return action.state
     case actions.RESET_GAME:
