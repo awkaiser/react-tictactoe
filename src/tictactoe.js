@@ -16,7 +16,7 @@ const _openSpaces = new WeakMap()
 const _nextPlayers = new WeakMap()
 
 // Class for public API of Tic Tac Toe game
-export class TicTacToe {
+export default class TicTacToe {
   constructor (state = {}) {
     this.reset(state)
   }
@@ -147,7 +147,7 @@ export class TicTacToe {
       [[1, 0], [1, 1], [1, 2]], // Middle vertical
       [[0, 1], [1, 1], [2, 1]], // Middle horizontal
       [[0, 0], [1, 1], [2, 2]], // First diagonal
-      [[0, 2], [1, 1], [2, 0]]  // Second diagonal
+      [[0, 2], [1, 1], [2, 0]] // Second diagonal
     ]
 
     let combosRemaining = winningCombos.length
@@ -155,7 +155,7 @@ export class TicTacToe {
     let winner
 
     function playerIsWinning (first, second, third) {
-      let player = board[first[0]][first[1]]
+      const player = board[first[0]][first[1]]
 
       if (!player) {
         return false

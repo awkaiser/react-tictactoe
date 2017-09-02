@@ -1,16 +1,12 @@
-'use strict'
+import test from 'tape'
 
-require('babel-register')
-
-var test = require('tape')
-
-var TicTacToe = require('./src/tictactoe').TicTacToe
+import TicTacToe from './src/tictactoe'
 
 test('Tic Tac Toe recognizes winning conditions', (t) => {
   t.plan(8)
 
   // Left side
-  var leftSide = new TicTacToe({
+  const leftSide = new TicTacToe({
     board: [
       [1, 1, 1],
       [2, 2, 0],
@@ -22,7 +18,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
   t.equal(leftSide.hasWon(), 1)
 
   // Top side
-  var topSide = new TicTacToe({
+  const topSide = new TicTacToe({
     board: [
       [1, 2, 0],
       [1, 2, 0],
@@ -34,7 +30,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
   t.equal(topSide.hasWon(), 1)
 
   // Right side
-  var rightSide = new TicTacToe({
+  const rightSide = new TicTacToe({
     board: [
       [0, 0, 0],
       [1, 1, 0],
@@ -46,7 +42,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
   t.equal(rightSide.hasWon(), 2)
 
   // Bottom side
-  var bottomSide = new TicTacToe({
+  const bottomSide = new TicTacToe({
     board: [
       [0, 1, 2],
       [0, 1, 2],
@@ -58,7 +54,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
   t.equal(bottomSide.hasWon(), 2)
 
   // Diagonals
-  var diagonalA = new TicTacToe({
+  const diagonalA = new TicTacToe({
     board: [
       [2, 0, 1],
       [0, 1, 0],
@@ -69,7 +65,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
 
   t.equal(diagonalA.hasWon(), 1)
 
-  var diagonalB = new TicTacToe({
+  const diagonalB = new TicTacToe({
     board: [
       [2, 0, 1],
       [0, 2, 0],
@@ -81,7 +77,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
   t.equal(diagonalB.hasWon(), 2)
 
   // Mixed conditions
-  var mix1 = new TicTacToe({
+  const mix1 = new TicTacToe({
     board: [
       [1, 2, 1],
       [1, 2, 0],
@@ -92,7 +88,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
 
   t.equal(mix1.hasWon(), 1)
 
-  var mix2 = new TicTacToe({
+  const mix2 = new TicTacToe({
     board: [
       [1, 1, 1],
       [1, 2, 2],
@@ -109,7 +105,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
 test('Tic Tac Toe recognizes non-winning conditions', (t) => {
   t.plan(4)
 
-  var noWin1 = new TicTacToe({
+  const noWin1 = new TicTacToe({
     board: [
       [0, 0, 0],
       [0, 0, 0],
@@ -119,7 +115,7 @@ test('Tic Tac Toe recognizes non-winning conditions', (t) => {
 
   t.equal(noWin1.hasWon(), false)
 
-  var noWin2 = new TicTacToe({
+  const noWin2 = new TicTacToe({
     board: [
       [0, 0, 2],
       [2, 1, 1],
@@ -129,7 +125,7 @@ test('Tic Tac Toe recognizes non-winning conditions', (t) => {
 
   t.equal(noWin2.hasWon(), false)
 
-  var noWin3 = new TicTacToe({
+  const noWin3 = new TicTacToe({
     board: [
       [2, 1, 2],
       [1, 1, 2],
@@ -139,7 +135,7 @@ test('Tic Tac Toe recognizes non-winning conditions', (t) => {
 
   t.equal(noWin3.hasWon(), false)
 
-  var noWin4 = new TicTacToe({
+  const noWin4 = new TicTacToe({
     board: [
       [1, 2, 2],
       [2, 1, 1],
@@ -155,15 +151,15 @@ test('Tic Tac Toe recognizes non-winning conditions', (t) => {
 test('Tic Tac Toe recognizes state changes', (t) => {
   t.plan(7)
 
-  var game1 = new TicTacToe()
-  var game2 = game1.cloneWithMove(0, 0)
-  var game3 = game2.cloneWithMove(1, 1)
+  const game1 = new TicTacToe()
+  const game2 = game1.cloneWithMove(0, 0)
+  const game3 = game2.cloneWithMove(1, 1)
 
   game2.move(2, 2)
 
-  var game1State = game1.state()
-  var game2State = game2.state()
-  var game3State = game3.state()
+  const game1State = game1.state()
+  const game2State = game2.state()
+  const game3State = game3.state()
 
   t.equal(game1State.board[0][0], 0)
 
@@ -181,9 +177,7 @@ test('Tic Tac Toe recognizes state changes', (t) => {
 test('Tic Tac Toe players can draw game', (t) => {
   t.plan(3)
 
-  var game = new TicTacToe()
-
-  var state
+  let game = new TicTacToe()
 
   /**
    * X O X
@@ -201,7 +195,7 @@ test('Tic Tac Toe players can draw game', (t) => {
   game = game.cloneWithMove(1, 0) // O
   game = game.cloneWithMove(2, 0) // X (draw)
 
-  state = game.state()
+  const state = game.state()
 
   t.equal(state.openSpaces, 0)
   t.equal(state.hasDrawn, true)
@@ -213,9 +207,7 @@ test('Tic Tac Toe players can draw game', (t) => {
 test('Tic Tac Toe recognizes a player 1 win', (t) => {
   t.plan(3)
 
-  var game = new TicTacToe()
-
-  var state
+  let game = new TicTacToe()
 
   /**
    * o x o
@@ -231,7 +223,7 @@ test('Tic Tac Toe recognizes a player 1 win', (t) => {
   game = game.cloneWithMove(0, 1) // o
   game = game.cloneWithMove(1, 2) // x (winner)
 
-  state = game.state()
+  const state = game.state()
 
   t.equal(state.openSpaces, 2)
   t.equal(state.hasDrawn, false)
@@ -243,9 +235,7 @@ test('Tic Tac Toe recognizes a player 1 win', (t) => {
 test('Tic Tac Toe recognizes a player 2 win', (t) => {
   t.plan(3)
 
-  var game = new TicTacToe()
-
-  var state
+  let game = new TicTacToe()
 
   /**
    * o - x
@@ -260,7 +250,7 @@ test('Tic Tac Toe recognizes a player 2 win', (t) => {
   game = game.cloneWithMove(2, 2) // x
   game = game.cloneWithMove(0, 1) // o (winner)
 
-  state = game.state()
+  const state = game.state()
 
   t.equal(state.openSpaces, 3)
   t.equal(state.hasDrawn, false)

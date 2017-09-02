@@ -1,0 +1,10 @@
+{
+  "extends": ["standard", "standard-jsx", "standard-react"],
+  "rules": {
+    "no-console": ["error"],
+    "no-use-before-define": ["error", { "functions": true, "classes": true }],
+    "no-var": ["error"],
+    "prefer-const": ["error", { "ignoreReadBeforeAssign": true }],
+    "react/jsx-no-bind": ["error", { "ignoreRefs": true }]
+  }
+}

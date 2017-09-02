@@ -17,6 +17,19 @@ export function startMove (x, y) {
   }
 }
 
+export function finishMove (state) {
+  return {
+    type: FINISH_MOVE,
+    state
+  }
+}
+
+export function resetGame () {
+  return {
+    type: RESET_GAME
+  }
+}
+
 export function makeMove (x, y) {
   return function (dispatch, getState) {
     dispatch(startMove(x, y))
@@ -28,18 +41,5 @@ export function makeMove (x, y) {
         resolve(state)
       }, 10)
     })).then(state => dispatch(finishMove(state)))
-  }
-}
-
-export function finishMove (state) {
-  return {
-    type: FINISH_MOVE,
-    state
-  }
-}
-
-export function resetGame () {
-  return {
-    type: RESET_GAME
   }
 }

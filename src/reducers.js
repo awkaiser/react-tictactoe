@@ -1,10 +1,10 @@
+import TicTacToe from './tictactoe'
+
 import * as actions from './actions'
 
 export const game = new TicTacToe()
 
 const initialState = game.state()
-
-import { TicTacToe } from './tictactoe'
 
 export function ticTacToeApp (state = initialState, action) {
   switch (action.type) {

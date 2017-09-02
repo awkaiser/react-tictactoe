@@ -6,7 +6,9 @@ import TicTacToe from '../components/TicTacToe.jsx'
 
 const mapStateToProps = (state) => {
   return {
-    state
+    board: state.board,
+    hasDrawn: state.hasDrawn,
+    hasWon: state.hasWon
   }
 }
 
