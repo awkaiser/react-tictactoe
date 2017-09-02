@@ -1,7 +1,8 @@
 import React from 'react'
-import ReactDOM from 'react-dom' // eslint-disable-line
 
-import TicTacToeSpaceContainer from '../containers/TicTacToeSpaceContainer' // eslint-disable-line
+import PropTypes from 'prop-types'
+
+import TicTacToeSpaceContainer from '../containers/TicTacToeSpaceContainer'
 
 const TicTacToeColumn = (props) => {
   return (
@@ -16,8 +17,8 @@ const TicTacToeColumn = (props) => {
 }
 
 TicTacToeColumn.propTypes = {
-  column: React.PropTypes.array.isRequired,
-  x: React.PropTypes.number.isRequired
+  column: PropTypes.array.isRequired,
+  x: PropTypes.number.isRequired
 }
 
 export default TicTacToeColumn

@@ -1,5 +1,6 @@
 import React from 'react'
-import ReactDOM from 'react-dom' // eslint-disable-line
+
+import PropTypes from 'prop-types'
 
 const TicTacToeSpace = (props) => {
   const classNames = ['ttt-space']
@@ -24,8 +25,8 @@ const TicTacToeSpace = (props) => {
 }
 
 TicTacToeSpace.propTypes = {
-  played: React.PropTypes.number.isRequired,
-  onClick: React.PropTypes.func.isRequired
+  played: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired
 }
 
 export default TicTacToeSpace

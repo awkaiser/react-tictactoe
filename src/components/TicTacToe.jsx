@@ -1,7 +1,8 @@
 import React from 'react'
-import ReactDOM from 'react-dom' // eslint-disable-line
 
-import TicTacToeColumn from './TicTacToeColumn.jsx' // eslint-disable-line
+import PropTypes from 'prop-types'
+
+import TicTacToeColumn from './TicTacToeColumn.jsx'
 
 const TicTacToe = (props) => {
   let message = 'Game on! :)'
@@ -34,10 +35,10 @@ const TicTacToe = (props) => {
 }
 
 TicTacToe.propTypes = {
-  board: React.PropTypes.object.isRequired,
-  hasDrawn: React.PropTypes.bool,
-  hasWon: React.PropTypes.number,
-  onResetClick: React.PropTypes.func.isRequired
+  board: PropTypes.object.isRequired,
+  hasDrawn: PropTypes.bool,
+  hasWon: PropTypes.number,
+  onResetClick: PropTypes.func.isRequired
 }
 
 export default TicTacToe
