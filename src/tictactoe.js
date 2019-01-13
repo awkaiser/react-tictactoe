@@ -134,7 +134,7 @@ export default class TicTacToe {
   hasWon () {
     // Game cannot be won until the 5th move
     if (_openSpaces.get(this) > 4) {
-      return false
+      return 0
     }
 
     const board = _boards.get(this)
@@ -158,12 +158,12 @@ export default class TicTacToe {
       const player = board[first[0]][first[1]]
 
       if (!player) {
-        return false
+        return 0
       }
 
       return player === board[second[0]][second[1]] &&
         player === board[third[0]][third[1]]
-        ? player : false
+        ? player : 0
     }
 
     do {
@@ -172,6 +172,6 @@ export default class TicTacToe {
       combosRemaining--
     } while (!winner && combosRemaining !== 0)
 
-    return winner // 1 or 2 for winning player, false for no win
+    return winner // 1 or 2 for winning player, 0 for no win
   }
 }

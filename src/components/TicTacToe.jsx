@@ -35,7 +35,7 @@ const TicTacToe = (props) => {
 }
 
 TicTacToe.propTypes = {
-  board: PropTypes.object.isRequired,
+  board: PropTypes.array.isRequired,
   hasDrawn: PropTypes.bool,
   hasWon: PropTypes.number,
   onResetClick: PropTypes.func.isRequired
