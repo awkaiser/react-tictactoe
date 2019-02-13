@@ -27,8 +27,8 @@ const TicTacToe = (props) => {
         <button className='btn btn-primary' onClick={props.onResetClick}>Reset Game</button>
       </div>
       <div className='ttt-github'>
-        <iframe src='https://ghbtns.com/github-btn.html?user=awkaiser&repo=react-tictactoe&type=star' frameBorder='0' scrolling='0' width='51px' height='20px' />
-        <iframe src='https://ghbtns.com/github-btn.html?user=awkaiser&type=follow' frameBorder='0' scrolling='0' width='123px' height='20px' />
+        <iframe src='https://ghbtns.com/github-btn.html?user=awkaiser&repo=react-tictactoe&type=star' title='github-star' frameBorder='0' scrolling='0' width='51px' height='20px' />
+        <iframe src='https://ghbtns.com/github-btn.html?user=awkaiser&type=follow' title='github-follow' frameBorder='0' scrolling='0' width='123px' height='20px' />
       </div>
     </div>
   )

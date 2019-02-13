@@ -1,10 +1,6 @@
-import test from 'tape'
+import TicTacToe from './tictactoe'
 
-import TicTacToe from './src/tictactoe'
-
-test('Tic Tac Toe recognizes winning conditions', (t) => {
-  t.plan(8)
-
+it('recognizes winning conditions', () => {
   // Left side
   const leftSide = new TicTacToe({
     board: [
@@ -15,7 +11,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
     openSpaces: 4
   })
 
-  t.equal(leftSide.hasWon(), 1)
+  expect(leftSide.hasWon()).toEqual(1)
 
   // Top side
   const topSide = new TicTacToe({
@@ -27,7 +23,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
     openSpaces: 4
   })
 
-  t.equal(topSide.hasWon(), 1)
+  expect(topSide.hasWon()).toEqual(1)
 
   // Right side
   const rightSide = new TicTacToe({
@@ -39,7 +35,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
     openSpaces: 4
   })
 
-  t.equal(rightSide.hasWon(), 2)
+  expect(rightSide.hasWon()).toEqual(2)
 
   // Bottom side
   const bottomSide = new TicTacToe({
@@ -51,7 +47,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
     openSpaces: 4
   })
 
-  t.equal(bottomSide.hasWon(), 2)
+  expect(bottomSide.hasWon()).toEqual(2)
 
   // Diagonals
   const diagonalA = new TicTacToe({
@@ -63,7 +59,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
     openSpaces: 4
   })
 
-  t.equal(diagonalA.hasWon(), 1)
+  expect(diagonalA.hasWon()).toEqual(1)
 
   const diagonalB = new TicTacToe({
     board: [
@@ -74,7 +70,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
     openSpaces: 4
   })
 
-  t.equal(diagonalB.hasWon(), 2)
+  expect(diagonalB.hasWon()).toEqual(2)
 
   // Mixed conditions
   const mix1 = new TicTacToe({
@@ -86,7 +82,7 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
     openSpaces: 2
   })
 
-  t.equal(mix1.hasWon(), 1)
+  expect(mix1.hasWon()).toEqual(1)
 
   const mix2 = new TicTacToe({
     board: [
@@ -97,14 +93,10 @@ test('Tic Tac Toe recognizes winning conditions', (t) => {
     openSpaces: 0
   })
 
-  t.equal(mix2.hasWon(), 1)
-
-  t.end()
+  expect(mix2.hasWon()).toEqual(1)
 })
 
-test('Tic Tac Toe recognizes non-winning conditions', (t) => {
-  t.plan(4)
-
+it('recognizes non-winning conditions', () => {
   const noWin1 = new TicTacToe({
     board: [
       [0, 0, 0],
@@ -113,7 +105,7 @@ test('Tic Tac Toe recognizes non-winning conditions', (t) => {
     ]
   })
 
-  t.equal(noWin1.hasWon(), false)
+  expect(noWin1.hasWon()).toEqual(0)
 
   const noWin2 = new TicTacToe({
     board: [
@@ -123,7 +115,7 @@ test('Tic Tac Toe recognizes non-winning conditions', (t) => {
     ]
   })
 
-  t.equal(noWin2.hasWon(), false)
+  expect(noWin2.hasWon()).toEqual(0)
 
   const noWin3 = new TicTacToe({
     board: [
@@ -133,7 +125,7 @@ test('Tic Tac Toe recognizes non-winning conditions', (t) => {
     ]
   })
 
-  t.equal(noWin3.hasWon(), false)
+  expect(noWin3.hasWon()).toEqual(0)
 
   const noWin4 = new TicTacToe({
     board: [
@@ -143,14 +135,10 @@ test('Tic Tac Toe recognizes non-winning conditions', (t) => {
     ]
   })
 
-  t.equal(noWin4.hasWon(), false)
-
-  t.end()
+  expect(noWin4.hasWon()).toEqual(0)
 })
 
-test('Tic Tac Toe recognizes state changes', (t) => {
-  t.plan(7)
-
+it('recognizes state changes', () => {
   const game1 = new TicTacToe()
   const game2 = game1.cloneWithMove(0, 0)
   const game3 = game2.cloneWithMove(1, 1)
@@ -161,22 +149,18 @@ test('Tic Tac Toe recognizes state changes', (t) => {
   const game2State = game2.state()
   const game3State = game3.state()
 
-  t.equal(game1State.board[0][0], 0)
+  expect(game1State.board[0][0]).toEqual(0)
 
-  t.equal(game2State.board[0][0], 1)
-  t.equal(game2State.board[1][1], 0)
-  t.equal(game2State.board[2][2], 2)
+  expect(game2State.board[0][0]).toEqual(1)
+  expect(game2State.board[1][1]).toEqual(0)
+  expect(game2State.board[2][2]).toEqual(2)
 
-  t.equal(game3State.board[0][0], 1)
-  t.equal(game3State.board[1][1], 2)
-  t.equal(game3State.board[2][2], 0)
-
-  t.end()
+  expect(game3State.board[0][0]).toEqual(1)
+  expect(game3State.board[1][1]).toEqual(2)
+  expect(game3State.board[2][2]).toEqual(0)
 })
 
-test('Tic Tac Toe players can draw game', (t) => {
-  t.plan(3)
-
+test('players can draw game', () => {
   let game = new TicTacToe()
 
   /**
@@ -197,16 +181,12 @@ test('Tic Tac Toe players can draw game', (t) => {
 
   const state = game.state()
 
-  t.equal(state.openSpaces, 0)
-  t.equal(state.hasDrawn, true)
-  t.equal(state.hasWon, false)
-
-  t.end()
+  expect(state.openSpaces).toEqual(0)
+  expect(state.hasDrawn).toEqual(true)
+  expect(state.hasWon).toEqual(0)
 })
 
-test('Tic Tac Toe recognizes a player 1 win', (t) => {
-  t.plan(3)
-
+it('recognizes a player 1 win', () => {
   let game = new TicTacToe()
 
   /**
@@ -225,16 +205,12 @@ test('Tic Tac Toe recognizes a player 1 win', (t) => {
 
   const state = game.state()
 
-  t.equal(state.openSpaces, 2)
-  t.equal(state.hasDrawn, false)
-  t.equal(state.hasWon, 1)
-
-  t.end()
+  expect(state.openSpaces).toEqual(2)
+  expect(state.hasDrawn).toEqual(false)
+  expect(state.hasWon).toEqual(1)
 })
 
-test('Tic Tac Toe recognizes a player 2 win', (t) => {
-  t.plan(3)
-
+it('recognizes a player 2 win', () => {
   let game = new TicTacToe()
 
   /**
@@ -252,9 +228,7 @@ test('Tic Tac Toe recognizes a player 2 win', (t) => {
 
   const state = game.state()
 
-  t.equal(state.openSpaces, 3)
-  t.equal(state.hasDrawn, false)
-  t.equal(state.hasWon, 2)
-
-  t.end()
+  expect(state.openSpaces).toEqual(3)
+  expect(state.hasDrawn).toEqual(false)
+  expect(state.hasWon).toEqual(2)
 })
