@@ -12,10 +12,7 @@ import { ticTacToeApp } from './reducers';
 
 import TicTacToeContainer from './containers/TicTacToeContainer';
 
-const store = createStore(
-  ticTacToeApp,
-  applyMiddleware(thunk)
-);
+const store = createStore(ticTacToeApp, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>

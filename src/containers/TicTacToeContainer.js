@@ -1,28 +1,28 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
-import { resetGame } from '../actions'
+import { resetGame } from '../actions';
 
-import TicTacToe from '../components/TicTacToe.jsx'
+import TicTacToe from '../components/TicTacToe.jsx';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     board: state.board,
     hasDrawn: state.hasDrawn,
     hasWon: state.hasWon
-  }
-}
+  };
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     onResetClick: () => {
-      dispatch(resetGame())
+      dispatch(resetGame());
     }
-  }
-}
+  };
+};
 
 const TicTacToeContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(TicTacToe)
+)(TicTacToe);
 
-export default TicTacToeContainer
+export default TicTacToeContainer;
