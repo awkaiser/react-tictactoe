@@ -1,6 +1,6 @@
 # Tic Tac Toe
 
-Undefeatable tic tac toe (minimax algorithm) developed with ES6, React.js and Redux
+Undefeatable tic tac toe (minimax algorithm) developed with ES6, React.js and React Hooks
 
 ## Try it online
 

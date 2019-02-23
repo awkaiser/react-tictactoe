@@ -4,18 +4,16 @@ import * as actions from './actions';
 
 export const game = new TicTacToe();
 
-const initialState = game.state();
+export const ticTacToeAppInit = game.state();
 
-export function ticTacToeApp(state = initialState, action) {
+export function ticTacToeApp(state, action) {
   switch (action.type) {
-    case actions.START_MOVE:
+    case actions.MAKE_MOVE:
       if (state.hasWon || state.board[action.x][action.y] !== 0) {
         return state;
       }
 
-      return game.cloneWithMove(action.x, action.y).state();
-    case actions.FINISH_MOVE:
-      return action.state;
+      return game.move(action.x, action.y);
     case actions.RESET_GAME:
       return game.reset();
     default:

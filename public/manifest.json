@@ -1,6 +1,6 @@
 {
   "short_name": "Tic Tac Toe",
-  "name": "React + Redux: Tic Tac Toe",
+  "name": "React Hooks: Tic Tac Toe",
   "icons": [
     {
       "src": "favicon.ico",

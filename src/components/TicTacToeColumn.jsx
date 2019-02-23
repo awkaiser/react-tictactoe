@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import PropTypes from 'prop-types';
 
-import TicTacToeSpaceContainer from '../containers/TicTacToeSpaceContainer';
+import { TicTacToeStore } from '../contexts';
+import { makeMove } from '../actions';
 
-const TicTacToeColumn = props => {
+import TicTacToeSpace from './TicTacToeSpace';
+
+const TicTacToeColumn = ({ column, x }) => {
+  const { dispatch, state } = useContext(TicTacToeStore);
+
   return (
     <div className="ttt-column">
-      {props.column.map(function(value, y) {
+      {column.map(function(value, y) {
+        function click() {
+          dispatch(makeMove(x, y));
+        }
+
         return (
-          <TicTacToeSpaceContainer key={props.x + '_' + y} x={props.x} y={y} />
+          <TicTacToeSpace
+            key={x + '_' + y}
+            onClick={click}
+            played={state.board[x][y] || 0}
+          />
         );
       })}
     </div>

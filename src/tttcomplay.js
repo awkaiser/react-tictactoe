@@ -7,43 +7,36 @@
  * - Use minimax algorithm
  */
 
+const MAX_DEPTH = 9;
+
 export default class TTTComPlay {
   static possibleMoves(board) {
     const moves = [];
 
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
-        // Empty spaces will be `0` (falsey)
-        if (!board[x][y]) {
-          moves.push([x, y]);
-        }
+        if (!board[x][y]) moves.push([x, y]); // Empty spaces will be `0` (falsey)
       }
     }
 
     return moves;
   }
+
   static score(state, depth = 0) {
-    const winner = state.hasWon;
+    if (!state.hasWon) return 0;
 
-    if (!winner) {
-      return 0;
-    }
-
-    return winner === 1 ? 10 + depth : depth - 10;
+    return depth + (state.hasWon === 1 ? MAX_DEPTH : -MAX_DEPTH);
   }
+
   static minimax(game, depth = 0) {
-    if (depth >= 9) {
-      throw new Error(
-        'Yikes! Runaway minimax algorithm has reached an impossible depth.'
-      );
+    if (depth >= MAX_DEPTH) {
+      throw new Error('Runaway minimax algorithm has reached impossible depth');
     }
 
     const state = game.state();
 
     if (state.hasWon || state.hasDrawn) {
-      return {
-        score: TTTComPlay.score(state, depth)
-      };
+      return { score: TTTComPlay.score(state, depth) };
     }
 
     const possibleMoves = TTTComPlay.possibleMoves(state.board);
@@ -71,10 +64,11 @@ export default class TTTComPlay {
     }
 
     return {
-      move: moves[typeof maxIndex !== 'undefined' ? maxIndex : minIndex],
-      score: scores[typeof maxIndex !== 'undefined' ? maxIndex : minIndex]
+      move: moves[maxIndex !== undefined ? maxIndex : minIndex],
+      score: scores[maxIndex !== undefined ? maxIndex : minIndex]
     };
   }
+
   static openingMove(game) {
     const state = game.state();
 
@@ -88,6 +82,7 @@ export default class TTTComPlay {
       return corners[Math.floor(Math.random() * 4)];
     }
   }
+
   static idealMove(game) {
     return TTTComPlay.minimax(game).move;
   }

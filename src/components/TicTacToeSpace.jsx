@@ -2,31 +2,31 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-const TicTacToeSpace = props => {
+const TicTacToeSpace = ({ onClick, played }) => {
   const classNames = ['ttt-space'];
 
   let display = String.fromCharCode(160); // &nbsp;
 
-  if (props.played === 1) {
+  if (played === 1) {
     display = 'X';
-  } else if (props.played === 2) {
+  } else if (played === 2) {
     display = 'O';
   }
 
-  if (!props.played) {
+  if (!played) {
     classNames.push('ttt-space-open');
   }
 
   return (
-    <div className={classNames.join(' ')} onClick={props.onClick}>
+    <div className={classNames.join(' ')} onClick={onClick}>
       <div className="ttt-symbol">{display}</div>
     </div>
   );
 };
 
 TicTacToeSpace.propTypes = {
-  played: PropTypes.number.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  played: PropTypes.number.isRequired
 };
 
 export default TicTacToeSpace;
