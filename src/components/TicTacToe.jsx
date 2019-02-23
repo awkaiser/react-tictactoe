@@ -7,6 +7,20 @@ import { resetGame } from '../actions';
 
 import { TicTacToeStore } from '../contexts';
 
+function getColumnKey(column, index) {
+  return index + column.reduce((acc, val) => acc + val, '');
+}
+
+function renderColumn(column, index) {
+  return (
+    <TicTacToeColumn
+      column={column}
+      key={getColumnKey(column, index)}
+      x={index}
+    />
+  );
+}
+
 const TicTacToe = () => {
   const [state, dispatch] = useReducer(ticTacToeApp, ticTacToeAppInit);
 
@@ -25,11 +39,7 @@ const TicTacToe = () => {
   return (
     <TicTacToeStore.Provider value={{ dispatch, state }}>
       <div className="ttt-game">
-        <div className="ttt-board">
-          {state.board.map(function(column, index) {
-            return <TicTacToeColumn key={index} column={column} x={index} />;
-          })}
-        </div>
+        <div className="ttt-board">{state.board.map(renderColumn)}</div>
         <div className="ttt-message">{message}</div>
         <div className="ttt-controls">
           <button className="btn btn-primary" onClick={resetClick}>
