@@ -12,16 +12,24 @@ body {
   width: 25em;
 }
 
-.ttt-message {
+.ttt-message, noscript {
   background: white;
   border: 0.25em solid #DDE;
   -webkit-border-radius: 10px 10px 10px 10px;
   -moz-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
-  color: #99C;
+  color: #668;
   margin: 0 auto 2em auto;
   padding: 1em 0;
   width: 25em;
+}
+
+noscript {
+  display: block;
+  font-size: 1.3em;
+  font-weight: bold;
+  margin: 1em auto;
+  text-align: center;
 }
 
 .ttt-github {
@@ -45,6 +53,7 @@ body {
   -webkit-box-shadow: 10px 10px 5px 0px rgba(200, 200, 215, 0.55);
   -moz-box-shadow: 10px 10px 5px 0px rgba(200, 200, 215, 0.55);
   box-shadow: 10px 10px 5px 0px rgba(200, 200, 215, 0.55);
+  cursor: default;
   height: 8em;
   margin: 0 0.5em 0.5em 0;
   width: 8em;

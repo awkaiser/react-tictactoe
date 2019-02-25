@@ -6,15 +6,9 @@ export const RESET_GAME = 'RESET_GAME';
 // Action creators
 
 export function makeMove(x, y) {
-  return {
-    type: MAKE_MOVE,
-    x,
-    y
-  };
+  return { type: MAKE_MOVE, x, y };
 }
 
 export function resetGame() {
-  return {
-    type: RESET_GAME
-  };
+  return { type: RESET_GAME };
 }

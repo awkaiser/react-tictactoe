@@ -1,32 +1,43 @@
-import React from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import PropTypes from 'prop-types';
 
-const TicTacToeSpace = ({ onClick, played }) => {
-  const classNames = ['ttt-space'];
+import { TicTacToeStore } from '../contexts';
+import { makeMove } from '../actions';
 
-  let display = String.fromCharCode(160); // &nbsp;
+const TicTacToeSpace = React.memo(
+  ({ value, x, y }) => {
+    const dispatch = useContext(TicTacToeStore);
 
-  if (played === 1) {
-    display = 'X';
-  } else if (played === 2) {
-    display = 'O';
-  }
+    const classNames = ['ttt-space'];
 
-  if (!played) {
-    classNames.push('ttt-space-open');
-  }
+    const click = useCallback(() => dispatch(makeMove(x, y)), [x, y]);
 
-  return (
-    <div className={classNames.join(' ')} onClick={onClick}>
-      <div className="ttt-symbol">{display}</div>
-    </div>
-  );
-};
+    let display = String.fromCharCode(160); // &nbsp;
+
+    if (value === 1) {
+      display = 'X';
+    } else if (value === 2) {
+      display = 'O';
+    } else {
+      classNames.push('ttt-space-open');
+    }
+
+    return (
+      <div className={classNames.join(' ')} onClick={click}>
+        <div className="ttt-symbol">{display}</div>
+      </div>
+    );
+  },
+  (prevProps, nextProps) => prevProps.value === nextProps.value
+);
+
+TicTacToeSpace.displayName = 'TicTacToeSpace';
 
 TicTacToeSpace.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  played: PropTypes.number.isRequired
+  value: PropTypes.number.isRequired,
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired
 };
 
 export default TicTacToeSpace;

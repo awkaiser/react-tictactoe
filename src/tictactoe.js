@@ -9,135 +9,102 @@
 
 import TTTComPlay from './tttcomplay';
 
+const WINNING_COMBOS = [
+  [[0, 0], [0, 1], [0, 2]], // Left side
+  [[0, 0], [1, 0], [2, 0]], // Top side
+  [[2, 0], [2, 1], [2, 2]], // Right side
+  [[0, 2], [1, 2], [2, 2]], // Bottom side
+  [[1, 0], [1, 1], [1, 2]], // Middle vertical
+  [[0, 1], [1, 1], [2, 1]], // Middle horizontal
+  [[0, 0], [1, 1], [2, 2]], // First diagonal
+  [[0, 2], [1, 1], [2, 0]] // Second diagonal
+];
+
 // Class for public API of Tic Tac Toe game
 export default class TicTacToe {
-  constructor(state = {}) {
+  constructor(state) {
     this.reset(state);
   }
 
-  reset(state = {}) {
-    // Multi-dimensional array for simple 3x3 board by x/y coords
-    this._board = state.board || [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+  reset(state) {
+    this._state = {
+      board: [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+      hasWon: 0,
+      nextPlayer: 1,
+      openSpaces: 9,
+      ...state
+    };
 
-    // Default: 9 open spaces
-    this._openSpaces = state.openSpaces < 9 ? state.openSpaces : 9;
+    if (state) this._state.hasWon = this.hasWon();
 
-    // Default: Player 1 (human) goes first
-    this._nextPlayer = state.nextPlayer || 1;
-
-    // Update and return state
-    return this.state();
+    return this.state;
   }
 
   move(x, y) {
-    const board = this._board;
-    const state = this.state();
-
-    let openSpaces = state.openSpaces;
+    const state = this.state;
 
     // Return early on invalid move
     if (
       x === undefined ||
       y === undefined ||
-      state.hasWon ||
-      state.hasDrawn ||
-      board[x][y]
+      state.hasWon !== 0 ||
+      state.board[x][y]
     ) {
       return state;
     }
 
     // Set chosen space to "next player" ID
-    board[x][y] = state.nextPlayer;
+    state.board[x][y] = state.nextPlayer;
 
     // Decrement counter of available open spaces
-    openSpaces -= 1;
+    state.openSpaces -= 1;
 
-    // Store updated open spaces value prior to performing computer move
-    this._openSpaces = openSpaces;
+    // Winning move?
+    state.hasWon = this.hasWon();
 
     // Next turn!
-    if (state.nextPlayer === 1) {
-      this._nextPlayer = 2;
+    if (state.openSpaces) {
+      if (state.nextPlayer === 1) {
+        state.nextPlayer = 2;
 
-      if (openSpaces) {
-        let idealMove;
-
-        if (openSpaces === 8) {
-          // Reduce minimax search space by playing center or corner first
-          idealMove = TTTComPlay.openingMove(this);
-        } else {
-          // Perform computer's ideal move
-          idealMove = TTTComPlay.idealMove(this);
-        }
-
-        this.move.apply(this, idealMove);
+        return this.move.apply(this, TTTComPlay.idealMove(this));
+      } else {
+        state.nextPlayer = 1;
       }
-    } else {
-      this._nextPlayer = 1;
     }
 
-    return this.state();
+    return this.state;
   }
 
-  state() {
-    // Check remaining open spaces
-    const openSpaces = this._openSpaces;
-
-    // Don't recompute state if nothing has changed
-    if (this._state && this._state.openSpaces === openSpaces) {
-      return this._state;
-    }
-
-    // Check if we've reached a winning game state (1 = Player 1 won, 2 = Player 2 won)
-    const hasWon = this.hasWon();
-
-    // Store and return representation of current game state
-    this._state = {
-      board: this._board,
-      hasDrawn: !hasWon && this._openSpaces === 0,
-      hasWon,
-      nextPlayer: this._nextPlayer,
-      openSpaces: this._openSpaces
-    };
-
+  get state() {
     return this._state;
   }
 
   cloneWithMove(x, y) {
-    if (this._board[x][y]) return this;
+    const { board, nextPlayer, openSpaces } = this.state;
+
+    if (board[x][y]) return this;
 
     // Moves as cloned state is useful for considering future moves + unit tests
-    const board = this._board.map(column => column.slice());
+    const clonedBoard = board.map(column => column.slice());
 
-    board[x][y] = this._nextPlayer;
+    clonedBoard[x][y] = nextPlayer;
 
     return new TicTacToe({
-      board,
-      nextPlayer: this._nextPlayer === 1 ? 2 : 1,
-      openSpaces: this._openSpaces - 1
+      board: clonedBoard,
+      nextPlayer: nextPlayer === 1 ? 2 : 1,
+      openSpaces: openSpaces - 1
     });
   }
 
   hasWon() {
-    // Game cannot be won until the 5th move
-    if (this._openSpaces > 4) return 0;
+    const { board, openSpaces } = this.state;
 
-    const board = this._board;
+    if (openSpaces > 4) return 0; // Game cannot be won until the 5th move
 
-    const winningCombos = [
-      [[0, 0], [0, 1], [0, 2]], // Left side
-      [[0, 0], [1, 0], [2, 0]], // Top side
-      [[2, 0], [2, 1], [2, 2]], // Right side
-      [[0, 2], [1, 2], [2, 2]], // Bottom side
-      [[1, 0], [1, 1], [1, 2]], // Middle vertical
-      [[0, 1], [1, 1], [2, 1]], // Middle horizontal
-      [[0, 0], [1, 1], [2, 2]], // First diagonal
-      [[0, 2], [1, 1], [2, 0]] // Second diagonal
-    ];
+    let combosRemaining = WINNING_COMBOS.length;
 
-    let combosRemaining = winningCombos.length;
-
-    let winner;
+    let winner = 0;
 
     function playerIsWinning(first, second, third) {
       const combo = [
@@ -152,11 +119,12 @@ export default class TicTacToe {
     }
 
     do {
-      winner = playerIsWinning.apply(this, winningCombos[combosRemaining - 1]);
+      winner = playerIsWinning.apply(this, WINNING_COMBOS[combosRemaining - 1]);
 
       combosRemaining--;
-    } while (!winner && combosRemaining !== 0);
+    } while (!winner && combosRemaining > 0);
 
-    return winner; // 1 or 2 for winning player, 0 for no win
+    // -1 for draw, 0 for no win, 1 or 2 for winning player
+    return !winner && openSpaces === 0 ? -1 : winner;
   }
 }

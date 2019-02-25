@@ -7,6 +7,7 @@
  * - Use minimax algorithm
  */
 
+const CORNERS = [[0, 0], [2, 0], [0, 2], [2, 2]];
 const MAX_DEPTH = 9;
 
 export default class TTTComPlay {
@@ -33,9 +34,9 @@ export default class TTTComPlay {
       throw new Error('Runaway minimax algorithm has reached impossible depth');
     }
 
-    const state = game.state();
+    const state = game.state;
 
-    if (state.hasWon || state.hasDrawn) {
+    if (state.hasWon !== 0) {
       return { score: TTTComPlay.score(state, depth) };
     }
 
@@ -70,20 +71,16 @@ export default class TTTComPlay {
   }
 
   static openingMove(game) {
-    const state = game.state();
-
-    const corners = [[0, 0], [2, 0], [0, 2], [2, 2]];
-
-    if (state.board[1][1] === 0) {
-      // Play center
-      return [1, 1];
-    } else {
-      // Play a random corner
-      return corners[Math.floor(Math.random() * 4)];
-    }
+    // Play center or random corner
+    return game.state.board[1][1] === 0
+      ? [1, 1]
+      : CORNERS[Math.floor(Math.random() * 4)];
   }
 
   static idealMove(game) {
-    return TTTComPlay.minimax(game).move;
+    // Reduce minimax search space for first computer move
+    return game.state.openSpaces === 8
+      ? TTTComPlay.openingMove(game)
+      : TTTComPlay.minimax(game).move;
   }
 }

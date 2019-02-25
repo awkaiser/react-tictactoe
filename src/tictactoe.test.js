@@ -97,9 +97,9 @@ it('recognizes state changes', () => {
 
   game2.move(2, 2);
 
-  const game1State = game1.state();
-  const game2State = game2.state();
-  const game3State = game3.state();
+  const game1State = game1.state;
+  const game2State = game2.state;
+  const game3State = game3.state;
 
   expect(game1State.board[0][0]).toEqual(0);
 
@@ -131,11 +131,10 @@ test('players can draw game', () => {
   game = game.cloneWithMove(1, 0); // O
   game = game.cloneWithMove(2, 0); // X (draw)
 
-  const state = game.state();
+  const state = game.state;
 
   expect(state.openSpaces).toEqual(0);
-  expect(state.hasDrawn).toEqual(true);
-  expect(state.hasWon).toEqual(0);
+  expect(state.hasWon).toEqual(-1);
 });
 
 it('recognizes a player 1 win', () => {
@@ -155,10 +154,9 @@ it('recognizes a player 1 win', () => {
   game = game.cloneWithMove(0, 1); // O
   game = game.cloneWithMove(1, 2); // X (winner)
 
-  const state = game.state();
+  const state = game.state;
 
   expect(state.openSpaces).toEqual(2);
-  expect(state.hasDrawn).toEqual(false);
   expect(state.hasWon).toEqual(1);
 });
 
@@ -178,9 +176,8 @@ it('recognizes a player 2 win', () => {
   game = game.cloneWithMove(2, 2); // X
   game = game.cloneWithMove(0, 1); // O (winner)
 
-  const state = game.state();
+  const state = game.state;
 
   expect(state.openSpaces).toEqual(3);
-  expect(state.hasDrawn).toEqual(false);
   expect(state.hasWon).toEqual(2);
 });
