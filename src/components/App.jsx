@@ -14,9 +14,9 @@ const App = () => {
 
   let message = 'Game on! :)';
 
-  if (state.hasWon > 0) {
-    message = 'Player ' + state.hasWon + ' has won the game!';
-  } else if (state.hasWon === -1) {
+  if (state.winner > 0) {
+    message = 'Player ' + state.winner + ' has won the game!';
+  } else if (state.winner === -1) {
     message = 'The game has been drawn!';
   }
 

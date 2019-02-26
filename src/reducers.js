@@ -6,17 +6,17 @@ export const game = new TicTacToe();
 
 export const ticTacToeAppInit = {
   board: [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
-  hasWon: 0
+  winner: 0
 };
 
-function transformGameState({ board, hasWon }) {
-  return { board, hasWon };
+function transformGameState({ board, winner }) {
+  return { board, winner };
 }
 
 export function ticTacToeApp(state, { type, x, y }) {
   switch (type) {
     case MAKE_MOVE: {
-      if (state.hasWon !== 0 || state.board[x][y]) return state;
+      if (state.winner !== 0 || state.board[x][y]) return state;
 
       return transformGameState(game.move(x, y));
     }

@@ -1,93 +1,139 @@
 import TicTacToe from './tictactoe';
 
 it('recognizes winning conditions', () => {
-  // Left side
+  /** Left side
+   * X O -
+   * X O -
+   * X - -
+   */
   const leftSide = new TicTacToe({
-    board: [[1, 1, 1], [2, 2, 0], [0, 0, 0]],
-    openSpaces: 4
+    board: [[1, 1, 1], [2, 2, 0], [0, 0, 0]]
   });
 
-  expect(leftSide.hasWon()).toEqual(1);
+  expect(leftSide.state.winner).toEqual(1);
 
-  // Top side
+  /** Top side
+   * X X X
+   * O O -
+   * - - -
+   */
   const topSide = new TicTacToe({
-    board: [[1, 2, 0], [1, 2, 0], [1, 0, 0]],
-    openSpaces: 4
+    board: [[1, 2, 0], [1, 2, 0], [1, 0, 0]]
   });
 
-  expect(topSide.hasWon()).toEqual(1);
+  expect(topSide.state.winner).toEqual(1);
 
-  // Right side
+  /** Right side
+   * - X O
+   * - X O
+   * - - O
+   */
   const rightSide = new TicTacToe({
-    board: [[0, 0, 0], [1, 1, 0], [2, 2, 2]],
-    openSpaces: 4
+    board: [[0, 0, 0], [1, 1, 0], [2, 2, 2]]
   });
 
-  expect(rightSide.hasWon()).toEqual(2);
+  expect(rightSide.state.winner).toEqual(2);
 
-  // Bottom side
+  /** Bottom side
+   * - - -
+   * X X -
+   * O O O
+   */
   const bottomSide = new TicTacToe({
-    board: [[0, 1, 2], [0, 1, 2], [0, 0, 2]],
-    openSpaces: 4
+    board: [[0, 1, 2], [0, 1, 2], [0, 0, 2]]
   });
 
-  expect(bottomSide.hasWon()).toEqual(2);
+  expect(bottomSide.state.winner).toEqual(2);
 
-  // Diagonals
+  /** Diagonal
+   * O - X
+   * - X -
+   * X - O
+   */
   const diagonalA = new TicTacToe({
-    board: [[2, 0, 1], [0, 1, 0], [1, 0, 2]],
-    openSpaces: 4
+    board: [[2, 0, 1], [0, 1, 0], [1, 0, 2]]
   });
 
-  expect(diagonalA.hasWon()).toEqual(1);
+  expect(diagonalA.state.winner).toEqual(1);
 
+  /** Diagonal
+   * O - X
+   * - O -
+   * X - O
+   */
   const diagonalB = new TicTacToe({
-    board: [[2, 0, 1], [0, 2, 0], [1, 0, 2]],
-    openSpaces: 4
+    board: [[2, 0, 1], [0, 2, 0], [1, 0, 2]]
   });
 
-  expect(diagonalB.hasWon()).toEqual(2);
+  expect(diagonalB.state.winner).toEqual(2);
 
-  // Mixed conditions
+  /** Mixed
+   * X X X
+   * O O -
+   * X - O
+   */
   const mix1 = new TicTacToe({
-    board: [[1, 2, 1], [1, 2, 0], [1, 0, 2]],
-    openSpaces: 2
+    board: [[1, 2, 1], [1, 2, 0], [1, 0, 2]]
   });
 
-  expect(mix1.hasWon()).toEqual(1);
+  expect(mix1.state.winner).toEqual(1);
 
+  /** Mixed
+   * X X O
+   * X O O
+   * X O X
+   */
   const mix2 = new TicTacToe({
-    board: [[1, 1, 1], [1, 2, 2], [2, 2, 1]],
-    openSpaces: 0
+    board: [[1, 1, 1], [1, 2, 2], [2, 2, 1]]
   });
 
-  expect(mix2.hasWon()).toEqual(1);
+  expect(mix2.state.winner).toEqual(1);
 });
 
 it('recognizes non-winning conditions', () => {
+  /**
+   * - - -
+   * - - -
+   * - - -
+   */
   const noWin1 = new TicTacToe({
     board: [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
   });
 
-  expect(noWin1.hasWon()).toEqual(0);
+  expect(noWin1.state.winner).toEqual(0);
 
+  /**
+   * - O -
+   * - X -
+   * O X -
+   */
   const noWin2 = new TicTacToe({
     board: [[0, 0, 2], [2, 1, 1], [0, 0, 0]]
   });
 
-  expect(noWin2.hasWon()).toEqual(0);
+  expect(noWin2.state.winner).toEqual(0);
 
+  /**
+   * O X X
+   * X X O
+   * O O X
+   */
   const noWin3 = new TicTacToe({
     board: [[2, 1, 2], [1, 1, 2], [1, 2, 1]]
   });
 
-  expect(noWin3.hasWon()).toEqual(0);
+  expect(noWin3.state.winner).toEqual(-1);
 
+  /**
+   * X O X
+   * O X X
+   * O X O
+   */
   const noWin4 = new TicTacToe({
     board: [[1, 2, 2], [2, 1, 1], [1, 1, 2]]
   });
 
-  expect(noWin4.hasWon()).toEqual(0);
+  expect(noWin4.state.winner).toEqual(-1);
 });
 
 it('recognizes state changes', () => {
@@ -133,8 +179,8 @@ test('players can draw game', () => {
 
   const state = game.state;
 
-  expect(state.openSpaces).toEqual(0);
-  expect(state.hasWon).toEqual(-1);
+  expect(game.openSpaces.length).toEqual(0);
+  expect(state.winner).toEqual(-1);
 });
 
 it('recognizes a player 1 win', () => {
@@ -156,8 +202,8 @@ it('recognizes a player 1 win', () => {
 
   const state = game.state;
 
-  expect(state.openSpaces).toEqual(2);
-  expect(state.hasWon).toEqual(1);
+  expect(game.openSpaces.length).toEqual(2);
+  expect(state.winner).toEqual(1);
 });
 
 it('recognizes a player 2 win', () => {
@@ -178,6 +224,6 @@ it('recognizes a player 2 win', () => {
 
   const state = game.state;
 
-  expect(state.openSpaces).toEqual(3);
-  expect(state.hasWon).toEqual(2);
+  expect(game.openSpaces.length).toEqual(3);
+  expect(state.winner).toEqual(2);
 });
