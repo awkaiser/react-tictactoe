@@ -1,6 +1,6 @@
 import React, { useCallback, useReducer } from 'react';
 
-import TicTacToe from './TicTacToe.jsx';
+import TicTacToe from './TicTacToe';
 
 import { ticTacToeApp, ticTacToeAppInit } from '../reducers';
 import { resetGame } from '../actions';

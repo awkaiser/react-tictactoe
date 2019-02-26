@@ -2,13 +2,13 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import TicTacToeSpace from './TicTacToeSpace';
+import Space from './Space';
 
-const TicTacToeColumn = React.memo(
+const Column = React.memo(
   ({ rows, x }) => (
     <div className="ttt-column">
       {rows.map((value, y) => (
-        <TicTacToeSpace key={`${x}_${y}`} value={value} x={x} y={y} />
+        <Space key={`${x}_${y}`} value={value} x={x} y={y} />
       ))}
     </div>
   ),
@@ -17,11 +17,11 @@ const TicTacToeColumn = React.memo(
     prevProps.x === nextProps.x
 );
 
-TicTacToeColumn.displayName = 'TicTacToeColumn';
+Column.displayName = 'TicTacToeColumn';
 
-TicTacToeColumn.propTypes = {
+Column.propTypes = {
   rows: PropTypes.array.isRequired,
   x: PropTypes.number.isRequired
 };
 
-export default TicTacToeColumn;
+export default Column;

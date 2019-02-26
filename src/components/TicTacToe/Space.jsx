@@ -2,10 +2,10 @@ import React, { useCallback, useContext } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { TicTacToeStore } from '../contexts';
-import { makeMove } from '../actions';
+import { TicTacToeStore } from '../../contexts';
+import { makeMove } from '../../actions';
 
-const TicTacToeSpace = React.memo(
+const Space = React.memo(
   ({ value, x, y }) => {
     const dispatch = useContext(TicTacToeStore);
 
@@ -32,12 +32,12 @@ const TicTacToeSpace = React.memo(
   (prevProps, nextProps) => prevProps.value === nextProps.value
 );
 
-TicTacToeSpace.displayName = 'TicTacToeSpace';
+Space.displayName = 'TicTacToeSpace';
 
-TicTacToeSpace.propTypes = {
+Space.propTypes = {
   value: PropTypes.number.isRequired,
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired
 };
 
-export default TicTacToeSpace;
+export default Space;
