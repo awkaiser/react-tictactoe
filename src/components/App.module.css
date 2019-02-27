@@ -1,5 +1,4 @@
-.message,
-noscript {
+.message {
   background: white;
   border: 0.25em solid #dde;
   -webkit-border-radius: 10px 10px 10px 10px;
@@ -9,14 +8,6 @@ noscript {
   margin: 0 auto 2em auto;
   padding: 1em 0;
   width: 25em;
-}
-
-noscript {
-  display: block;
-  font-size: 1.3em;
-  font-weight: bold;
-  margin: 1em auto;
-  text-align: center;
 }
 
 .btn {
