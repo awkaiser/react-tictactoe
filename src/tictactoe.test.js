@@ -10,7 +10,7 @@ it('recognizes winning conditions', () => {
     board: [[1, 1, 1], [2, 2, 0], [0, 0, 0]]
   });
 
-  expect(leftSide.state.winner).toEqual(1);
+  expect(leftSide.winner).toEqual(1);
 
   /** Top side
    * X X X
@@ -21,7 +21,7 @@ it('recognizes winning conditions', () => {
     board: [[1, 2, 0], [1, 2, 0], [1, 0, 0]]
   });
 
-  expect(topSide.state.winner).toEqual(1);
+  expect(topSide.winner).toEqual(1);
 
   /** Right side
    * - X O
@@ -32,7 +32,7 @@ it('recognizes winning conditions', () => {
     board: [[0, 0, 0], [1, 1, 0], [2, 2, 2]]
   });
 
-  expect(rightSide.state.winner).toEqual(2);
+  expect(rightSide.winner).toEqual(2);
 
   /** Bottom side
    * - - -
@@ -43,7 +43,7 @@ it('recognizes winning conditions', () => {
     board: [[0, 1, 2], [0, 1, 2], [0, 0, 2]]
   });
 
-  expect(bottomSide.state.winner).toEqual(2);
+  expect(bottomSide.winner).toEqual(2);
 
   /** Diagonal
    * O - X
@@ -54,7 +54,7 @@ it('recognizes winning conditions', () => {
     board: [[2, 0, 1], [0, 1, 0], [1, 0, 2]]
   });
 
-  expect(diagonalA.state.winner).toEqual(1);
+  expect(diagonalA.winner).toEqual(1);
 
   /** Diagonal
    * O - X
@@ -65,7 +65,7 @@ it('recognizes winning conditions', () => {
     board: [[2, 0, 1], [0, 2, 0], [1, 0, 2]]
   });
 
-  expect(diagonalB.state.winner).toEqual(2);
+  expect(diagonalB.winner).toEqual(2);
 
   /** Mixed
    * X X X
@@ -76,7 +76,7 @@ it('recognizes winning conditions', () => {
     board: [[1, 2, 1], [1, 2, 0], [1, 0, 2]]
   });
 
-  expect(mix1.state.winner).toEqual(1);
+  expect(mix1.winner).toEqual(1);
 
   /** Mixed
    * X X O
@@ -87,7 +87,7 @@ it('recognizes winning conditions', () => {
     board: [[1, 1, 1], [1, 2, 2], [2, 2, 1]]
   });
 
-  expect(mix2.state.winner).toEqual(1);
+  expect(mix2.winner).toEqual(1);
 });
 
 it('recognizes non-winning conditions', () => {
@@ -100,7 +100,7 @@ it('recognizes non-winning conditions', () => {
     board: [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
   });
 
-  expect(noWin1.state.winner).toEqual(0);
+  expect(noWin1.winner).toEqual(0);
 
   /**
    * - O -
@@ -111,7 +111,7 @@ it('recognizes non-winning conditions', () => {
     board: [[0, 0, 2], [2, 1, 1], [0, 0, 0]]
   });
 
-  expect(noWin2.state.winner).toEqual(0);
+  expect(noWin2.winner).toEqual(0);
 
   /**
    * O X X
@@ -122,7 +122,7 @@ it('recognizes non-winning conditions', () => {
     board: [[2, 1, 2], [1, 1, 2], [1, 2, 1]]
   });
 
-  expect(noWin3.state.winner).toEqual(-1);
+  expect(noWin3.winner).toEqual(-1);
 
   /**
    * X O X
@@ -133,29 +133,36 @@ it('recognizes non-winning conditions', () => {
     board: [[1, 2, 2], [2, 1, 1], [1, 1, 2]]
   });
 
-  expect(noWin4.state.winner).toEqual(-1);
+  expect(noWin4.winner).toEqual(-1);
 });
 
 it('recognizes state changes', () => {
   const game1 = new TicTacToe();
-  const game2 = game1.cloneWithMove(0, 0);
-  const game3 = game2.cloneWithMove(1, 1);
+  const game2 = game1.cloneMove(0, 0);
+  const game3 = game2.cloneMove(1, 1);
+  const game4 = game3.cloneMove(1, 1); // already played (invalid)
 
   game2.move(2, 2);
 
-  const game1State = game1.state;
-  const game2State = game2.state;
-  const game3State = game3.state;
+  expect(game1.board[0][0]).toEqual(0);
+  expect(game1.board[1][1]).toEqual(0);
+  expect(game1.board[2][2]).toEqual(0);
+  expect(game1.openSpaces.length).toEqual(9);
 
-  expect(game1State.board[0][0]).toEqual(0);
+  expect(game2.board[0][0]).toEqual(1);
+  expect(game2.board[1][1]).toEqual(0);
+  expect(game2.board[2][2]).toEqual(2);
+  expect(game2.openSpaces.length).toEqual(7);
 
-  expect(game2State.board[0][0]).toEqual(1);
-  expect(game2State.board[1][1]).toEqual(0);
-  expect(game2State.board[2][2]).toEqual(2);
+  expect(game3.board[0][0]).toEqual(1);
+  expect(game3.board[1][1]).toEqual(2);
+  expect(game3.board[2][2]).toEqual(0);
+  expect(game3.openSpaces.length).toEqual(7);
 
-  expect(game3State.board[0][0]).toEqual(1);
-  expect(game3State.board[1][1]).toEqual(2);
-  expect(game3State.board[2][2]).toEqual(0);
+  expect(game4.board[0][0]).toEqual(1);
+  expect(game4.board[1][1]).toEqual(2);
+  expect(game4.board[2][2]).toEqual(0);
+  expect(game4.openSpaces.length).toEqual(7);
 });
 
 test('players can draw game', () => {
@@ -167,20 +174,18 @@ test('players can draw game', () => {
    * O X O
    */
 
-  game = game.cloneWithMove(1, 1); // X
-  game = game.cloneWithMove(2, 2); // O
-  game = game.cloneWithMove(0, 0); // X
-  game = game.cloneWithMove(0, 2); // O
-  game = game.cloneWithMove(2, 1); // X
-  game = game.cloneWithMove(0, 1); // O
-  game = game.cloneWithMove(1, 2); // X
-  game = game.cloneWithMove(1, 0); // O
-  game = game.cloneWithMove(2, 0); // X (draw)
-
-  const state = game.state;
+  game = game.cloneMove(1, 1); // X
+  game = game.cloneMove(2, 2); // O
+  game = game.cloneMove(0, 0); // X
+  game = game.cloneMove(0, 2); // O
+  game = game.cloneMove(2, 1); // X
+  game = game.cloneMove(0, 1); // O
+  game = game.cloneMove(1, 2); // X
+  game = game.cloneMove(1, 0); // O
+  game = game.cloneMove(2, 0); // X (draw)
 
   expect(game.openSpaces.length).toEqual(0);
-  expect(state.winner).toEqual(-1);
+  expect(game.winner).toEqual(-1);
 });
 
 it('recognizes a player 1 win', () => {
@@ -192,18 +197,16 @@ it('recognizes a player 1 win', () => {
    * X X -
    */
 
-  game = game.cloneWithMove(1, 1); // X
-  game = game.cloneWithMove(0, 0); // O
-  game = game.cloneWithMove(0, 2); // X
-  game = game.cloneWithMove(2, 0); // O
-  game = game.cloneWithMove(1, 0); // X
-  game = game.cloneWithMove(0, 1); // O
-  game = game.cloneWithMove(1, 2); // X (winner)
-
-  const state = game.state;
+  game = game.cloneMove(1, 1); // X
+  game = game.cloneMove(0, 0); // O
+  game = game.cloneMove(0, 2); // X
+  game = game.cloneMove(2, 0); // O
+  game = game.cloneMove(1, 0); // X
+  game = game.cloneMove(0, 1); // O
+  game = game.cloneMove(1, 2); // X (winner)
 
   expect(game.openSpaces.length).toEqual(2);
-  expect(state.winner).toEqual(1);
+  expect(game.winner).toEqual(1);
 });
 
 it('recognizes a player 2 win', () => {
@@ -215,15 +218,13 @@ it('recognizes a player 2 win', () => {
    * O - X
    */
 
-  game = game.cloneWithMove(2, 0); // X
-  game = game.cloneWithMove(0, 0); // O
-  game = game.cloneWithMove(1, 1); // X
-  game = game.cloneWithMove(0, 2); // O
-  game = game.cloneWithMove(2, 2); // X
-  game = game.cloneWithMove(0, 1); // O (winner)
-
-  const state = game.state;
+  game = game.cloneMove(2, 0); // X
+  game = game.cloneMove(0, 0); // O
+  game = game.cloneMove(1, 1); // X
+  game = game.cloneMove(0, 2); // O
+  game = game.cloneMove(2, 2); // X
+  game = game.cloneMove(0, 1); // O (winner)
 
   expect(game.openSpaces.length).toEqual(3);
-  expect(state.winner).toEqual(2);
+  expect(game.winner).toEqual(2);
 });

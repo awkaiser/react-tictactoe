@@ -5,11 +5,13 @@ import PropTypes from 'prop-types';
 import { TicTacToeStore } from '../../contexts';
 import { makeMove } from '../../actions';
 
+import styles from './Space.module.css';
+
 const Space = React.memo(
   ({ value, x, y }) => {
     const dispatch = useContext(TicTacToeStore);
 
-    const classNames = ['ttt-space'];
+    const classNames = [styles.root];
 
     const click = useCallback(() => dispatch(makeMove(x, y)), [x, y]);
 
@@ -20,12 +22,12 @@ const Space = React.memo(
     } else if (value === 2) {
       display = 'O';
     } else {
-      classNames.push('ttt-space-open');
+      classNames.push(styles.open);
     }
 
     return (
       <div className={classNames.join(' ')} onClick={click}>
-        <div className="ttt-symbol">{display}</div>
+        <div className={styles.symbol}>{display}</div>
       </div>
     );
   },

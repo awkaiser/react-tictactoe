@@ -7,6 +7,8 @@ import { resetGame } from '../actions';
 
 import { TicTacToeStore } from '../contexts';
 
+import styles from './App.module.css';
+
 const App = () => {
   const [state, dispatch] = useReducer(ticTacToeApp, ticTacToeAppInit);
 
@@ -25,13 +27,11 @@ const App = () => {
       <TicTacToeStore.Provider value={dispatch}>
         <TicTacToe columns={state.board} />
       </TicTacToeStore.Provider>
-      <div className="ttt-message">{message}</div>
-      <div className="ttt-controls">
-        <button className="btn btn-primary" onClick={resetClick}>
-          Reset Game
-        </button>
-      </div>
-      <div className="ttt-github">
+      <div className={styles.message}>{message}</div>
+      <button className={styles.btn} onClick={resetClick}>
+        Reset Game
+      </button>
+      <div className={styles.github}>
         <iframe
           frameBorder="0"
           height="20px"

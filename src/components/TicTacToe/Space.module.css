@@ -1,0 +1,22 @@
+.root {
+  background: white;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(200, 200, 215, 0.55);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(200, 200, 215, 0.55);
+  box-shadow: 10px 10px 5px 0px rgba(200, 200, 215, 0.55);
+  cursor: default;
+  height: 8em;
+  margin: 0 0.5em 0.5em 0;
+  width: 8em;
+}
+
+.open:hover {
+  background: #eefcfc;
+  cursor: pointer;
+}
+
+.symbol {
+  font-size: 5em;
+  font-family: sans-serif;
+  line-height: 0;
+  padding-top: 50%;
+}

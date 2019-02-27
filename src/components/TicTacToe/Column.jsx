@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 
 import Space from './Space';
 
+import styles from './Column.module.css';
+
 const Column = React.memo(
   ({ rows, x }) => (
-    <div className="ttt-column">
+    <div className={styles.root}>
       {rows.map((value, y) => (
         <Space key={`${x}_${y}`} value={value} x={x} y={y} />
       ))}
