@@ -2,7 +2,7 @@ import React, { useCallback, useReducer } from 'react';
 
 import TicTacToe from './TicTacToe';
 
-import { ticTacToeApp, ticTacToeAppInit } from '../reducers';
+import { ticTacToeApp, TTTInit } from '../reducers';
 import { resetGame } from '../actions';
 
 import { TicTacToeStore } from '../contexts';
@@ -10,7 +10,7 @@ import { TicTacToeStore } from '../contexts';
 import styles from './App.module.css';
 
 const App = () => {
-  const [state, dispatch] = useReducer(ticTacToeApp, ticTacToeAppInit);
+  const [state, dispatch] = useReducer(ticTacToeApp, TTTInit);
 
   const resetClick = useCallback(() => dispatch(resetGame()));
 
@@ -52,5 +52,7 @@ const App = () => {
     </>
   );
 };
+
+App.displayName = 'App';
 
 export default App;
