@@ -45,6 +45,8 @@ function getWinner(game) {
   return !winner && openSpaces.length === 0 ? -1 : winner;
 }
 
+const validMove = (x, y) => x >= 0 && x <= 3 && y >= 0 && y <= 3;
+
 // Class for public API of Tic Tac Toe game
 export default class TicTacToe {
   // #state; (TODO: Use private class field, waiting for TC39 stage 4)
@@ -94,14 +96,7 @@ export default class TicTacToe {
     const state = this._state;
 
     // Return early on invalid move
-    if (
-      x === undefined ||
-      y === undefined ||
-      this.winner !== 0 ||
-      this.board[x][y]
-    ) {
-      return state;
-    }
+    if (!validMove(x, y) || this.winner !== 0 || this.board[x][y]) return state;
 
     // Set chosen space to "next player" ID
     state.board[x][y] = state.nextPlayer;
@@ -111,29 +106,21 @@ export default class TicTacToe {
 
     // Next turn!
     if (state.winner === 0) {
-      if (state.nextPlayer === 1) {
-        state.nextPlayer = 2;
+      state.nextPlayer = state.nextPlayer === 1 ? 2 : 1;
 
-        return this.move.apply(this, TTTComPlay(this));
-      } else {
-        state.nextPlayer = 1;
-      }
+      if (state.nextPlayer === 2) this.move.apply(this, TTTComPlay(this));
     }
 
     return state;
   }
 
   cloneMove(x, y) {
-    if (this.board[x][y]) return this;
+    if (!validMove(x, y) || this.winner !== 0 || this.board[x][y]) return this;
 
-    // Moves as cloned state is useful for considering future moves + unit tests
-    const clonedBoard = this.board.map(column => column.slice());
+    const board = this.board.map(column => column.slice());
 
-    clonedBoard[x][y] = this.nextPlayer;
+    board[x][y] = this.nextPlayer;
 
-    return new TicTacToe({
-      board: clonedBoard,
-      nextPlayer: this.nextPlayer === 1 ? 2 : 1
-    });
+    return new TicTacToe({ board, nextPlayer: this.nextPlayer === 1 ? 2 : 1 });
   }
 }

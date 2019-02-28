@@ -228,3 +228,28 @@ it('recognizes a player 2 win', () => {
   expect(game.openSpaces.length).toEqual(3);
   expect(game.winner).toEqual(2);
 });
+
+it('is not affected by invalid moves', () => {
+  let game = new TicTacToe();
+
+  /**
+   * O - X
+   * O X -
+   * O - X
+   */
+
+  game = game.cloneMove(2, 0); // X
+  game = game.cloneMove(0, 0); // O
+  game = game.cloneMove(1, 1); // X
+  game = game.cloneMove(0, 2); // O
+  game = game.cloneMove(4, 4); // [invalid]
+  game = game.cloneMove(-1, -1); // [invalid]
+  game = game.cloneMove(-1, 4); // [invalid]
+  game = game.cloneMove(2, 2); // X
+  game = game.cloneMove(0, 1); // O (winner)
+  game = game.cloneMove(1, 0); // X [game already won]
+  game = game.cloneMove(2, 1); // O [game already won]
+
+  expect(game.openSpaces.length).toEqual(3);
+  expect(game.winner).toEqual(2);
+});
