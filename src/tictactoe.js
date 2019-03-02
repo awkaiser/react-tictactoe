@@ -45,7 +45,7 @@ function getWinner(game) {
   return !winner && openSpaces.length === 0 ? -1 : winner;
 }
 
-const validMove = (x, y) => x >= 0 && x <= 3 && y >= 0 && y <= 3;
+const validMove = (x, y) => x >= 0 && x < 3 && y >= 0 && y < 3;
 
 // Class for public API of Tic Tac Toe game
 export default class TicTacToe {
