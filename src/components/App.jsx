@@ -12,7 +12,7 @@ import styles from './App.module.css';
 const App = () => {
   const [state, dispatch] = useReducer(ticTacToeApp, TTTInit);
 
-  const resetClick = useCallback(() => dispatch(resetGame()));
+  const resetClick = useCallback(() => dispatch(resetGame()), [dispatch]);
 
   let message = 'Game on! :)';
 

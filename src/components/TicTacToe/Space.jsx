@@ -13,7 +13,7 @@ const Space = React.memo(
 
     const classNames = [styles.root];
 
-    const click = useCallback(() => dispatch(makeMove(x, y)), [x, y]);
+    const click = useCallback(() => dispatch(makeMove(x, y)), [dispatch, x, y]);
 
     let display = String.fromCharCode(160); // &nbsp;
 

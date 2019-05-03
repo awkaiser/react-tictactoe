@@ -49,7 +49,7 @@ const validMove = (x, y) => x >= 0 && x < 3 && y >= 0 && y < 3;
 
 // Class for public API of Tic Tac Toe game
 export default class TicTacToe {
-  // #state; (TODO: Use private class field, waiting for TC39 stage 4)
+  // #state; // TODO: Use private class field, waiting for TC39 stage 4
 
   constructor(state) {
     this.reset(state);
