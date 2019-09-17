@@ -1,18 +1,26 @@
-import React, { useCallback, useReducer } from 'react';
+import React, { useCallback, useEffect, useReducer } from 'react';
 
 import TicTacToe from './TicTacToe';
 
-import { ticTacToeApp, TTTInit } from '../reducers';
-import { resetGame } from '../actions';
+import TTTComPlay from '../tttcomplay';
+
+import { game, tttInitState, tttReducer } from '../reducers';
+import { makeMove, resetGame } from '../actions';
 
 import { TicTacToeStore } from '../contexts';
 
 import styles from './App.module.css';
 
 const App = () => {
-  const [state, dispatch] = useReducer(ticTacToeApp, TTTInit);
+  const [state, dispatch] = useReducer(tttReducer, tttInitState);
 
   const resetClick = useCallback(() => dispatch(resetGame()), [dispatch]);
+
+  useEffect(() => {
+    if (state.winner === 0 && state.nextPlayer === 2) {
+      dispatch(makeMove.apply(game, TTTComPlay(game)));
+    }
+  });
 
   let message = 'Game on! :)';
 

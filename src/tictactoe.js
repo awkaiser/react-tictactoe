@@ -7,8 +7,6 @@
  * - Player 2 must always win or draw the game
  */
 
-import TTTComPlay from './tttcomplay';
-
 const WINNING_COMBOS = [
   [[0, 0], [0, 1], [0, 2]], // Left side
   [[0, 0], [1, 0], [2, 0]], // Top side
@@ -105,11 +103,7 @@ export default class TicTacToe {
     state.winner = getWinner(this);
 
     // Next turn!
-    if (state.winner === 0) {
-      state.nextPlayer = state.nextPlayer === 1 ? 2 : 1;
-
-      if (state.nextPlayer === 2) this.move.apply(this, TTTComPlay(this));
-    }
+    state.nextPlayer = state.nextPlayer === 1 ? 2 : 1;
 
     return state;
   }

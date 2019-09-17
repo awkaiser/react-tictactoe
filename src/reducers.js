@@ -4,17 +4,25 @@ import { MAKE_MOVE, RESET_GAME } from './actions';
 
 export const game = new TicTacToe();
 
-export const TTTInit = { board: [[0, 0, 0], [0, 0, 0], [0, 0, 0]], winner: 0 };
+export const tttInitState = {
+  board: [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+  nextPlayer: 1,
+  winner: 0
+};
 
-const transformGameState = ({ board, winner }) => ({ board, winner });
+const tttUpdate = ({ board, nextPlayer, winner }) => ({
+  board,
+  nextPlayer,
+  winner
+});
 
-export function ticTacToeApp(state, { type, x, y }) {
+export function tttReducer(state, { type, x, y }) {
   switch (type) {
     case MAKE_MOVE:
-      return transformGameState(game.move(x, y));
+      return tttUpdate(game.move(x, y));
 
     case RESET_GAME:
-      return transformGameState(game.reset());
+      return tttUpdate(game.reset());
 
     default:
       return state;
