@@ -7,7 +7,12 @@
  * - Use minimax algorithm
  */
 
-const CORNERS = [[0, 0], [2, 0], [0, 2], [2, 2]];
+const CORNERS = [
+  [0, 0],
+  [2, 0],
+  [0, 2],
+  [2, 2]
+];
 const MAX_DEPTH = 9;
 
 function score({ winner }, depth = 0) {

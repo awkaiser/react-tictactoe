@@ -5,7 +5,11 @@ import { MAKE_MOVE, RESET_GAME } from './actions';
 export const game = new TicTacToe();
 
 export const tttInitState = {
-  board: [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+  board: [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0]
+  ],
   nextPlayer: 1,
   winner: 0
 };

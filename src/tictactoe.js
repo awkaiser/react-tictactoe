@@ -8,14 +8,46 @@
  */
 
 const WINNING_COMBOS = [
-  [[0, 0], [0, 1], [0, 2]], // Left side
-  [[0, 0], [1, 0], [2, 0]], // Top side
-  [[2, 0], [2, 1], [2, 2]], // Right side
-  [[0, 2], [1, 2], [2, 2]], // Bottom side
-  [[1, 0], [1, 1], [1, 2]], // Middle vertical
-  [[0, 1], [1, 1], [2, 1]], // Middle horizontal
-  [[0, 0], [1, 1], [2, 2]], // First diagonal
-  [[0, 2], [1, 1], [2, 0]] // Second diagonal
+  [
+    [0, 0],
+    [0, 1],
+    [0, 2]
+  ], // Left side
+  [
+    [0, 0],
+    [1, 0],
+    [2, 0]
+  ], // Top side
+  [
+    [2, 0],
+    [2, 1],
+    [2, 2]
+  ], // Right side
+  [
+    [0, 2],
+    [1, 2],
+    [2, 2]
+  ], // Bottom side
+  [
+    [1, 0],
+    [1, 1],
+    [1, 2]
+  ], // Middle vertical
+  [
+    [0, 1],
+    [1, 1],
+    [2, 1]
+  ], // Middle horizontal
+  [
+    [0, 0],
+    [1, 1],
+    [2, 2]
+  ], // First diagonal
+  [
+    [0, 2],
+    [1, 1],
+    [2, 0]
+  ] // Second diagonal
 ];
 
 function hasWon([x1, y1], [x2, y2], [x3, y3]) {
@@ -79,7 +111,11 @@ export default class TicTacToe {
 
   reset(state) {
     this._state = {
-      board: [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+      board: [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+      ],
       nextPlayer: 1,
       winner: 0,
       ...state
