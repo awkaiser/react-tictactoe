@@ -1,6 +1,6 @@
 {
   "name": "react-tictactoe",
-  "version": "3.7.0",
+  "version": "3.7.2",
   "description": "React Hooks: Tic Tac Toe",
   "author": "August “Kai” Kaiser <awkaiser@users.noreply.github.com>",
   "repository": "awkaiser/react-tictactoe",
@@ -17,15 +17,15 @@
     "npm": ">=6.13.0"
   },
   "dependencies": {
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "react-scripts": "^3.4.0"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "^3.4.1"
   },
   "devDependencies": {
     "gh-pages": "^2.2.0",
     "husky": "^4.2.3",
-    "lint-staged": "^10.0.8",
-    "prettier": "^1.19.1"
+    "lint-staged": "^10.0.9",
+    "prettier": "^2.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
