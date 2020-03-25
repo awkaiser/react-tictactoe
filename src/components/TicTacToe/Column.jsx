@@ -23,7 +23,7 @@ Column.displayName = 'TicTacToeColumn';
 
 Column.propTypes = {
   rows: PropTypes.array.isRequired,
-  x: PropTypes.number.isRequired
+  x: PropTypes.number.isRequired,
 };
 
 export default Column;

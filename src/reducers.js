@@ -8,16 +8,16 @@ export const tttInitState = {
   board: [
     [0, 0, 0],
     [0, 0, 0],
-    [0, 0, 0]
+    [0, 0, 0],
   ],
   nextPlayer: 1,
-  winner: 0
+  winner: 0,
 };
 
 const tttUpdate = ({ board, nextPlayer, winner }) => ({
   board,
   nextPlayer,
-  winner
+  winner,
 });
 
 export function tttReducer(state, { type, x, y }) {

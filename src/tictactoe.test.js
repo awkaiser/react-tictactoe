@@ -10,8 +10,8 @@ it('recognizes winning conditions', () => {
     board: [
       [1, 1, 1],
       [2, 2, 0],
-      [0, 0, 0]
-    ]
+      [0, 0, 0],
+    ],
   });
 
   expect(leftSide.winner).toEqual(1);
@@ -25,8 +25,8 @@ it('recognizes winning conditions', () => {
     board: [
       [1, 2, 0],
       [1, 2, 0],
-      [1, 0, 0]
-    ]
+      [1, 0, 0],
+    ],
   });
 
   expect(topSide.winner).toEqual(1);
@@ -40,8 +40,8 @@ it('recognizes winning conditions', () => {
     board: [
       [0, 0, 0],
       [1, 1, 0],
-      [2, 2, 2]
-    ]
+      [2, 2, 2],
+    ],
   });
 
   expect(rightSide.winner).toEqual(2);
@@ -55,8 +55,8 @@ it('recognizes winning conditions', () => {
     board: [
       [0, 1, 2],
       [0, 1, 2],
-      [0, 0, 2]
-    ]
+      [0, 0, 2],
+    ],
   });
 
   expect(bottomSide.winner).toEqual(2);
@@ -70,8 +70,8 @@ it('recognizes winning conditions', () => {
     board: [
       [2, 0, 1],
       [0, 1, 0],
-      [1, 0, 2]
-    ]
+      [1, 0, 2],
+    ],
   });
 
   expect(diagonalA.winner).toEqual(1);
@@ -85,8 +85,8 @@ it('recognizes winning conditions', () => {
     board: [
       [2, 0, 1],
       [0, 2, 0],
-      [1, 0, 2]
-    ]
+      [1, 0, 2],
+    ],
   });
 
   expect(diagonalB.winner).toEqual(2);
@@ -100,8 +100,8 @@ it('recognizes winning conditions', () => {
     board: [
       [1, 2, 1],
       [1, 2, 0],
-      [1, 0, 2]
-    ]
+      [1, 0, 2],
+    ],
   });
 
   expect(mix1.winner).toEqual(1);
@@ -115,8 +115,8 @@ it('recognizes winning conditions', () => {
     board: [
       [1, 1, 1],
       [1, 2, 2],
-      [2, 2, 1]
-    ]
+      [2, 2, 1],
+    ],
   });
 
   expect(mix2.winner).toEqual(1);
@@ -132,8 +132,8 @@ it('recognizes non-winning conditions', () => {
     board: [
       [0, 0, 0],
       [0, 0, 0],
-      [0, 0, 0]
-    ]
+      [0, 0, 0],
+    ],
   });
 
   expect(noWin1.winner).toEqual(0);
@@ -147,8 +147,8 @@ it('recognizes non-winning conditions', () => {
     board: [
       [0, 0, 2],
       [2, 1, 1],
-      [0, 0, 0]
-    ]
+      [0, 0, 0],
+    ],
   });
 
   expect(noWin2.winner).toEqual(0);
@@ -162,8 +162,8 @@ it('recognizes non-winning conditions', () => {
     board: [
       [2, 1, 2],
       [1, 1, 2],
-      [1, 2, 1]
-    ]
+      [1, 2, 1],
+    ],
   });
 
   expect(noWin3.winner).toEqual(-1);
@@ -177,8 +177,8 @@ it('recognizes non-winning conditions', () => {
     board: [
       [1, 2, 2],
       [2, 1, 1],
-      [1, 1, 2]
-    ]
+      [1, 1, 2],
+    ],
   });
 
   expect(noWin4.winner).toEqual(-1);

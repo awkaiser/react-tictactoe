@@ -39,7 +39,7 @@ Space.displayName = 'TicTacToeSpace';
 Space.propTypes = {
   value: PropTypes.number.isRequired,
   x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired
+  y: PropTypes.number.isRequired,
 };
 
 export default Space;

@@ -21,7 +21,7 @@ const TicTacToe = ({ columns }) => (
 TicTacToe.displayName = 'TicTacToe';
 
 TicTacToe.propTypes = {
-  columns: PropTypes.array.isRequired
+  columns: PropTypes.array.isRequired,
 };
 
 export default TicTacToe;

@@ -11,7 +11,7 @@ const CORNERS = [
   [0, 0],
   [2, 0],
   [0, 2],
-  [2, 2]
+  [2, 2],
 ];
 const MAX_DEPTH = 9;
 
@@ -29,7 +29,7 @@ function minimax(game, depth = 0) {
   const moves = [];
   const scores = [];
 
-  game.openSpaces.forEach(move => {
+  game.openSpaces.forEach((move) => {
     const { score } = minimax(game.cloneMove.apply(game, move), depth + 1);
 
     moves.push(move);
