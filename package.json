@@ -1,6 +1,6 @@
 {
   "name": "react-tictactoe",
-  "version": "3.7.4",
+  "version": "3.7.5",
   "description": "React Hooks: Tic Tac Toe",
   "author": "August “Kai” Kaiser <awkaiser@users.noreply.github.com>",
   "repository": "awkaiser/react-tictactoe",
@@ -51,8 +51,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --single-quote --write",
-      "git add"
+      "prettier --single-quote --write"
     ]
   }
 }
