@@ -79,18 +79,18 @@ const validMove = (x, y) => x >= 0 && x < 3 && y >= 0 && y < 3;
 
 // Class for public API of Tic Tac Toe game
 export default class TicTacToe {
-  // #state; // TODO: Use private class field, waiting for TC39 stage 4
+  #state;
 
   constructor(state) {
     this.reset(state);
   }
 
   get board() {
-    return this._state.board;
+    return this.#state.board;
   }
 
   get nextPlayer() {
-    return this._state.nextPlayer;
+    return this.#state.nextPlayer;
   }
 
   get openSpaces() {
@@ -106,11 +106,11 @@ export default class TicTacToe {
   }
 
   get winner() {
-    return this._state.winner;
+    return this.#state.winner;
   }
 
   reset(state) {
-    this._state = {
+    this.#state = {
       board: [
         [0, 0, 0],
         [0, 0, 0],
@@ -121,13 +121,13 @@ export default class TicTacToe {
       ...state,
     };
 
-    if (state) this._state.winner = getWinner(this);
+    if (state) this.#state.winner = getWinner(this);
 
-    return this._state;
+    return this.#state;
   }
 
   move(x, y) {
-    const state = this._state;
+    const state = this.#state;
 
     // Return early on invalid move
     if (!validMove(x, y) || this.winner !== 0 || this.board[x][y]) return state;
