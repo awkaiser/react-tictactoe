@@ -5,17 +5,17 @@
     "main.js.map": "/react-tictactoe/static/js/main.60a32792.chunk.js.map",
     "runtime-main.js": "/react-tictactoe/static/js/runtime-main.813f326f.js",
     "runtime-main.js.map": "/react-tictactoe/static/js/runtime-main.813f326f.js.map",
-    "static/js/2.6dbaa1cb.chunk.js": "/react-tictactoe/static/js/2.6dbaa1cb.chunk.js",
-    "static/js/2.6dbaa1cb.chunk.js.map": "/react-tictactoe/static/js/2.6dbaa1cb.chunk.js.map",
+    "static/js/2.3210c890.chunk.js": "/react-tictactoe/static/js/2.3210c890.chunk.js",
+    "static/js/2.3210c890.chunk.js.map": "/react-tictactoe/static/js/2.3210c890.chunk.js.map",
     "index.html": "/react-tictactoe/index.html",
-    "precache-manifest.4938cfa09a52cb5e5657801078c93197.js": "/react-tictactoe/precache-manifest.4938cfa09a52cb5e5657801078c93197.js",
+    "precache-manifest.b73f996a2fc8c24fc0c6189cfaede4b1.js": "/react-tictactoe/precache-manifest.b73f996a2fc8c24fc0c6189cfaede4b1.js",
     "service-worker.js": "/react-tictactoe/service-worker.js",
     "static/css/main.aaa93f45.chunk.css.map": "/react-tictactoe/static/css/main.aaa93f45.chunk.css.map",
-    "static/js/2.6dbaa1cb.chunk.js.LICENSE.txt": "/react-tictactoe/static/js/2.6dbaa1cb.chunk.js.LICENSE.txt"
+    "static/js/2.3210c890.chunk.js.LICENSE.txt": "/react-tictactoe/static/js/2.3210c890.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.813f326f.js",
-    "static/js/2.6dbaa1cb.chunk.js",
+    "static/js/2.3210c890.chunk.js",
     "static/css/main.aaa93f45.chunk.css",
     "static/js/main.60a32792.chunk.js"
   ]
