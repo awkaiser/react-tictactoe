@@ -1,0 +1,27 @@
+{
+  "name": "react-tictactoe",
+  "build": { "dockerfile": "Dockerfile" },
+  "extensions": [
+    "mgmcdermott.vscode-language-babel",
+    "clinyong.vscode-css-modules",
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "christian-kohler.npm-intellisense",
+    "esbenp.prettier-vscode"
+  ],
+  "forwardPorts": [3000],
+  "postCreateCommand": "npm install",
+  "postStartCommand": "npm start",
+  "settings": {
+    "gitlens.defaultDateStyle": "absolute",
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.statusBar.alignment": "left",
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.formatOnSave": true
+  }
+}
