@@ -1,10 +1,11 @@
 import TicTacToe from './tictactoe';
+import type { GameState } from './tictactoe';
 
 import { MAKE_MOVE, RESET_GAME } from './actions';
 
 export const game = new TicTacToe();
 
-export const tttInitState = {
+export const tttInitState: GameState = {
   board: [
     [0, 0, 0],
     [0, 0, 0],
@@ -14,13 +15,16 @@ export const tttInitState = {
   winner: 0,
 };
 
-const tttUpdate = ({ board, nextPlayer, winner }) => ({
+const tttUpdate = ({ board, nextPlayer, winner }: GameState) => ({
   board,
   nextPlayer,
   winner,
 });
 
-export function tttReducer(state, { type, x, y }) {
+export function tttReducer(
+  state: GameState,
+  { type, x, y }: { type: string; x: number; y: number }
+) {
   switch (type) {
     case MAKE_MOVE:
       return tttUpdate(game.move(x, y));

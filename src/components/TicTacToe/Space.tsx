@@ -1,14 +1,18 @@
 import React, { useCallback, useContext } from 'react';
 
-import PropTypes from 'prop-types';
-
 import { TicTacToeStore } from '../../contexts';
 import { makeMove } from '../../actions';
 
 import styles from './Space.module.css';
 
+type SpaceProps = {
+  value: number;
+  x: number;
+  y: number;
+};
+
 const Space = React.memo(
-  ({ value, x, y }) => {
+  ({ value, x, y }: SpaceProps) => {
     const dispatch = useContext(TicTacToeStore);
 
     const classNames = [styles.root];
@@ -35,11 +39,5 @@ const Space = React.memo(
 );
 
 Space.displayName = 'TicTacToeSpace';
-
-Space.propTypes = {
-  value: PropTypes.number.isRequired,
-  x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired,
-};
 
 export default Space;

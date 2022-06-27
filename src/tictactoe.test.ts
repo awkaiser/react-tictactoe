@@ -12,6 +12,7 @@ it('recognizes winning conditions', () => {
       [2, 2, 0],
       [0, 0, 0],
     ],
+    nextPlayer: 2,
   });
 
   expect(leftSide.winner).toEqual(1);
@@ -27,6 +28,7 @@ it('recognizes winning conditions', () => {
       [1, 2, 0],
       [1, 0, 0],
     ],
+    nextPlayer: 2,
   });
 
   expect(topSide.winner).toEqual(1);
@@ -42,6 +44,7 @@ it('recognizes winning conditions', () => {
       [1, 1, 0],
       [2, 2, 2],
     ],
+    nextPlayer: 1,
   });
 
   expect(rightSide.winner).toEqual(2);
@@ -57,6 +60,7 @@ it('recognizes winning conditions', () => {
       [0, 1, 2],
       [0, 0, 2],
     ],
+    nextPlayer: 1,
   });
 
   expect(bottomSide.winner).toEqual(2);
@@ -72,6 +76,7 @@ it('recognizes winning conditions', () => {
       [0, 1, 0],
       [1, 0, 2],
     ],
+    nextPlayer: 2,
   });
 
   expect(diagonalA.winner).toEqual(1);
@@ -87,6 +92,7 @@ it('recognizes winning conditions', () => {
       [0, 2, 0],
       [1, 0, 2],
     ],
+    nextPlayer: 1,
   });
 
   expect(diagonalB.winner).toEqual(2);
@@ -102,6 +108,7 @@ it('recognizes winning conditions', () => {
       [1, 2, 0],
       [1, 0, 2],
     ],
+    nextPlayer: 2,
   });
 
   expect(mix1.winner).toEqual(1);
@@ -117,6 +124,7 @@ it('recognizes winning conditions', () => {
       [1, 2, 2],
       [2, 2, 1],
     ],
+    nextPlayer: 2,
   });
 
   expect(mix2.winner).toEqual(1);
@@ -134,6 +142,7 @@ it('recognizes non-winning conditions', () => {
       [0, 0, 0],
       [0, 0, 0],
     ],
+    nextPlayer: 1,
   });
 
   expect(noWin1.winner).toEqual(0);
@@ -149,6 +158,7 @@ it('recognizes non-winning conditions', () => {
       [2, 1, 1],
       [0, 0, 0],
     ],
+    nextPlayer: 1,
   });
 
   expect(noWin2.winner).toEqual(0);
@@ -164,6 +174,7 @@ it('recognizes non-winning conditions', () => {
       [1, 1, 2],
       [1, 2, 1],
     ],
+    nextPlayer: 2,
   });
 
   expect(noWin3.winner).toEqual(-1);
@@ -179,6 +190,7 @@ it('recognizes non-winning conditions', () => {
       [2, 1, 1],
       [1, 1, 2],
     ],
+    nextPlayer: 2,
   });
 
   expect(noWin4.winner).toEqual(-1);

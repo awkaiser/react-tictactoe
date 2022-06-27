@@ -7,7 +7,19 @@
  * - Player 2 must always win or draw the game
  */
 
-const WINNING_COMBOS = [
+export type Coordinate = [number, number];
+
+export type GameState = {
+  board: [
+    [number, number, number],
+    [number, number, number],
+    [number, number, number]
+  ];
+  nextPlayer: number;
+  winner?: number;
+};
+
+const WINNING_COMBOS: [Coordinate, Coordinate, Coordinate][] = [
   [
     [0, 0],
     [0, 1],
@@ -50,13 +62,18 @@ const WINNING_COMBOS = [
   ], // Second diagonal
 ];
 
-function hasWon([x1, y1], [x2, y2], [x3, y3]) {
+function hasWon(
+  this: GameState['board'],
+  [x1, y1]: Coordinate,
+  [x2, y2]: Coordinate,
+  [x3, y3]: Coordinate
+) {
   const player = this[x1][y1];
 
   return this[x2][y2] === player && this[x3][y3] === player ? player : 0;
 }
 
-function getWinner(game) {
+function getWinner(game: TicTacToe) {
   const openSpaces = game.openSpaces;
 
   if (openSpaces.length > 4) return 0; // Game cannot be won until the 5th move
@@ -75,13 +92,21 @@ function getWinner(game) {
   return !winner && openSpaces.length === 0 ? -1 : winner;
 }
 
-const validMove = (x, y) => x >= 0 && x < 3 && y >= 0 && y < 3;
+const validMove = (x: number, y: number) => x >= 0 && x < 3 && y >= 0 && y < 3;
 
 // Class for public API of Tic Tac Toe game
 export default class TicTacToe {
-  #state;
+  #state: GameState = {
+    board: [
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+    ],
+    nextPlayer: 1,
+    winner: 0,
+  };
 
-  constructor(state) {
+  constructor(state?: GameState) {
     this.reset(state);
   }
 
@@ -94,7 +119,7 @@ export default class TicTacToe {
   }
 
   get openSpaces() {
-    const spaces = [];
+    const spaces: Coordinate[] = [];
 
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
@@ -109,7 +134,7 @@ export default class TicTacToe {
     return this.#state.winner;
   }
 
-  reset(state) {
+  reset(state?: GameState) {
     this.#state = {
       board: [
         [0, 0, 0],
@@ -126,7 +151,7 @@ export default class TicTacToe {
     return this.#state;
   }
 
-  move(x, y) {
+  move(x: number, y: number) {
     const state = this.#state;
 
     // Return early on invalid move
@@ -144,10 +169,14 @@ export default class TicTacToe {
     return state;
   }
 
-  cloneMove(x, y) {
+  cloneMove(x: number, y: number) {
     if (!validMove(x, y) || this.winner !== 0 || this.board[x][y]) return this;
 
-    const board = this.board.map((column) => column.slice());
+    const board: GameState['board'] = [
+      [this.board[0][0], this.board[0][1], this.board[0][2]],
+      [this.board[1][0], this.board[1][1], this.board[1][2]],
+      [this.board[2][0], this.board[2][1], this.board[2][2]],
+    ];
 
     board[x][y] = this.nextPlayer;
 

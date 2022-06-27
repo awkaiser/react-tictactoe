@@ -1,13 +1,18 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
 import Space from './Space';
 
 import styles from './Column.module.css';
 
+import type { GameState } from '../../tictactoe';
+
+type ColumnProps = {
+  rows: GameState['board'][0];
+  x: number;
+};
+
 const Column = React.memo(
-  ({ rows, x }) => (
+  ({ rows, x }: ColumnProps) => (
     <div className={styles.root}>
       {rows.map((value, y) => (
         <Space key={`${x}_${y}`} value={value} x={x} y={y} />
@@ -20,10 +25,5 @@ const Column = React.memo(
 );
 
 Column.displayName = 'TicTacToeColumn';
-
-Column.propTypes = {
-  rows: PropTypes.array.isRequired,
-  x: PropTypes.number.isRequired,
-};
 
 export default Column;
