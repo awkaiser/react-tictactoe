@@ -13,7 +13,7 @@ export type GameState = {
   board: [
     [number, number, number],
     [number, number, number],
-    [number, number, number]
+    [number, number, number],
   ];
   nextPlayer: number;
   winner?: number;
@@ -66,7 +66,7 @@ function hasWon(
   this: GameState['board'],
   [x1, y1]: Coordinate,
   [x2, y2]: Coordinate,
-  [x3, y3]: Coordinate
+  [x3, y3]: Coordinate,
 ) {
   const player = this[x1][y1];
 

@@ -26,7 +26,7 @@ function score({ winner }: GameState, depth = 0) {
 
 function minimax(
   game: TicTacToe,
-  depth = 0
+  depth = 0,
 ): { move: Coordinate; score: number } {
   if (depth >= MAX_DEPTH) throw new Error('Minimax reached impossible depth');
 
@@ -43,7 +43,7 @@ function minimax(
   });
 
   const index = scores.indexOf(
-    Math[game.nextPlayer === 1 ? 'max' : 'min'].apply(Math, scores)
+    Math[game.nextPlayer === 1 ? 'max' : 'min'].apply(Math, scores),
   );
 
   return { move: moves[index], score: scores[index] };

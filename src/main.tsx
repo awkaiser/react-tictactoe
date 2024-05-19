@@ -5,5 +5,5 @@ import App from './components/App';
 ReactDOM.createRoot(document.getElementById('tictactoe')!).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

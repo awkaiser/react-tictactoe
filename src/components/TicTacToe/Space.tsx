@@ -35,7 +35,7 @@ const Space = React.memo(
       </div>
     );
   },
-  (prevProps, nextProps) => prevProps.value === nextProps.value
+  (prevProps, nextProps) => prevProps.value === nextProps.value,
 );
 
 Space.displayName = 'TicTacToeSpace';

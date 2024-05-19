@@ -23,7 +23,7 @@ const tttUpdate = ({ board, nextPlayer, winner }: GameState) => ({
 
 export function tttReducer(
   state: GameState,
-  { type, x, y }: { type: string; x: number; y: number }
+  { type, x, y }: { type: string; x: number; y: number },
 ) {
   switch (type) {
     case MAKE_MOVE:

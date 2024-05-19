@@ -21,7 +21,7 @@ const Column = React.memo(
   ),
   (prevProps, nextProps) =>
     prevProps.rows.every((value, index) => nextProps.rows[index] === value) &&
-    prevProps.x === nextProps.x
+    prevProps.x === nextProps.x,
 );
 
 Column.displayName = 'TicTacToeColumn';
