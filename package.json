@@ -7,6 +7,7 @@
   "homepage": "https://awkaiser.github.io/react-tictactoe/",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "keywords": [
     "tic tac toe",
     "react",
